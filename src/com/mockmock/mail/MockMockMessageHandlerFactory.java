@@ -120,6 +120,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         public void done()
         {
             System.out.println("Finished");
+            MailQueue.add(mockMail);
         }
 
         /**
