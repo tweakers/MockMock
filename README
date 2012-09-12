@@ -1,0 +1,7 @@
+MockMock is a mock SMTP server which you can use to see if mails from your app are being sent correctly. This way you don't have to be afraid your test mails are being sent by accident to your users.
+At the moment MockMock prints out received emails to the terminal, but in a future version I’d like to add a web interface so emails can be viewed from there.
+
+By default MockMock starts on port 25000, but you can change that by starting with the –p parameter. For example:
+java –jar mockmock.jar –p 2525
+
+MockMock makes use of SubEthaSMTP which is released under the Apache v2.0 license.
