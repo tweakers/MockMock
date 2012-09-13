@@ -2,14 +2,24 @@ package com.mockmock.mail;
 
 public class MockMail
 {
+    private long id;
     private String from;
     private String to;
     private String subject;
     private String body;
     private String bodyHtml;
     private String rawMail;
-    
-    
+
+    public long getId()
+    {
+        return id;
+    }
+
+    public void setId(long id)
+    {
+        this.id = id;
+    }
+
     public String getFrom()
     {
         return from;

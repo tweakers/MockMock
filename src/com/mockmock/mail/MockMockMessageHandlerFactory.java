@@ -11,6 +11,7 @@ import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 
 public class MockMockMessageHandlerFactory implements MessageHandlerFactory
@@ -34,6 +35,10 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         {
             this.context = context;
             this.mockMail = new MockMail();
+
+            // give the mockmail a unique id (currently its just a timestamp in ms)
+            GregorianCalendar cal = new GregorianCalendar();
+            this.mockMail.setId(cal.getTimeInMillis());
         }
 
         /**

@@ -11,13 +11,26 @@ public class MailQueue
         mailQueue.add(mail);
     }
 
-    public static int count()
-    {
-        return mailQueue.size();
-    }
-
     public static ArrayList<MockMail> getMailQueue()
     {
         return mailQueue;
+    }
+
+    /**
+     * Returns the MockMail that belongs to the given ID
+     * @param id long
+     * @return MockMail
+     */
+    public static MockMail getById(long id)
+    {
+        for(MockMail mockMail : mailQueue)
+        {
+            if(mockMail.getId() == id)
+            {
+                return mockMail;
+            }
+        }
+
+        return null;
     }
 }

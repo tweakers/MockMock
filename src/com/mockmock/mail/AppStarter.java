@@ -6,6 +6,7 @@ import org.apache.commons.cli.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.subethamail.smtp.server.SMTPServer;
 
 public class AppStarter
@@ -48,9 +49,12 @@ public class AppStarter
 
         Server http = new Server(httpPort);
 
+        ResourceHandler resourceHandler = new ResourceHandler();
+        resourceHandler.setResourceBase("./static");
         Handler[] handlers = {
             new IndexHandler(),
-            new MailDetailHandler()
+            new MailDetailHandler(),
+            resourceHandler
         };
         HandlerList handlerList = new HandlerList();
         handlerList.setHandlers(handlers);

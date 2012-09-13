@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class IndexHandler extends AbstractHandler
+public class IndexHandler extends BaseHandler
 {
     @Override
     public void handle(String target, Request request, HttpServletRequest httpServletRequest,
@@ -23,8 +23,7 @@ public class IndexHandler extends AbstractHandler
             return;
         }
 
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
+        setDefaultResponseOptions(response);
 
         HeaderHtmlBuilder headerHtmlBuilder = new HeaderHtmlBuilder();
         String header = headerHtmlBuilder.build();
