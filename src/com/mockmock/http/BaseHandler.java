@@ -1,6 +1,5 @@
 package com.mockmock.http;
 
-import org.eclipse.jetty.server.Response;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.http.HttpServletResponse;

@@ -1,6 +1,10 @@
 package com.mockmock.mail;
 
-public class MockMail
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
+
+public class MockMail implements Comparable<MockMail>
 {
     private long id;
     private String from;
@@ -9,6 +13,7 @@ public class MockMail
     private String body;
     private String bodyHtml;
     private String rawMail;
+    private MimeMessage mimeMessage;
 
     public long getId()
     {
@@ -78,5 +83,37 @@ public class MockMail
     public void setBodyHtml(String bodyHtml) 
     {
         this.bodyHtml = bodyHtml;
+    }
+
+    public MimeMessage getMimeMessage()
+    {
+        return mimeMessage;
+    }
+
+    public void setMimeMessage(MimeMessage mimeMessage)
+    {
+        this.mimeMessage = mimeMessage;
+    }
+
+    @Override
+    public int compareTo(MockMail o)
+    {
+        try
+        {
+            Date sentDate = mimeMessage.getSentDate();
+            long sentTime = sentDate.getTime();
+
+            Date sentDate2 = o.getMimeMessage().getSentDate();
+            long receivedTime2 = sentDate2.getTime();
+
+            long diff = sentTime - receivedTime2;
+            return (int) diff;
+        }
+        catch (MessagingException e)
+        {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }

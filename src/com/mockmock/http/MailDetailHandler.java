@@ -2,12 +2,10 @@ package com.mockmock.http;
 
 import com.mockmock.htmlbuilder.FooterHtmlBuilder;
 import com.mockmock.htmlbuilder.HeaderHtmlBuilder;
-import com.mockmock.htmlbuilder.MailListHtmlBuilder;
 import com.mockmock.htmlbuilder.MailViewHtmlBuilder;
 import com.mockmock.mail.MailQueue;
 import com.mockmock.mail.MockMail;
 import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -83,8 +81,7 @@ public class MailDetailHandler extends BaseHandler
             String result = matcher.group(1);
             try
             {
-                long longResult = Long.valueOf(result);
-                return longResult;
+                return Long.valueOf(result);
             }
             catch (NumberFormatException e)
             {

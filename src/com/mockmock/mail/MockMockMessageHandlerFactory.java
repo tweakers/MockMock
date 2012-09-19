@@ -85,7 +85,8 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
             {
                 MimeMessage message = new MimeMessage(session, is);
                 mockMail.setSubject(message.getSubject());
-                
+                mockMail.setMimeMessage(message);
+
                 Object messageContent = message.getContent();
                 if(messageContent instanceof Multipart)
                 {

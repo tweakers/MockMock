@@ -4,13 +4,15 @@ import com.mockmock.htmlbuilder.FooterHtmlBuilder;
 import com.mockmock.htmlbuilder.HeaderHtmlBuilder;
 import com.mockmock.htmlbuilder.MailListHtmlBuilder;
 import com.mockmock.mail.MailQueue;
+import com.mockmock.mail.MockMail;
 import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class IndexHandler extends BaseHandler
 {
@@ -29,7 +31,10 @@ public class IndexHandler extends BaseHandler
         String header = headerHtmlBuilder.build();
 
         MailListHtmlBuilder mailListHtmlBuilder = new MailListHtmlBuilder();
-        mailListHtmlBuilder.setMailQueue(MailQueue.getMailQueue());
+        ArrayList<MockMail> mailList = MailQueue.getMailQueue();
+        Collections.sort(mailList);
+        Collections.reverse(mailList);
+        mailListHtmlBuilder.setMailQueue(mailList);
         String body = mailListHtmlBuilder.build();
 
         FooterHtmlBuilder footerHtmlBuilder = new FooterHtmlBuilder();

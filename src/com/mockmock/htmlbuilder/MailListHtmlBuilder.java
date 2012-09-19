@@ -3,6 +3,7 @@ package com.mockmock.htmlbuilder;
 import com.mockmock.mail.MockMail;
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 
 public class MailListHtmlBuilder implements HtmlBuilder
@@ -33,14 +34,12 @@ public class MailListHtmlBuilder implements HtmlBuilder
             output += "      <th>To</th>\n";
             output += "      <th>Subject</th>\n";
             output += "    </thead>\n";
-
             output += "    <tbody>\n";
             for (MockMail mail : mailQueue)
             {
                 output += buildMailRow(mail);
             }
             output += "    </tbody>\n";
-
             output += "  </table>\n";
         }
 
@@ -51,13 +50,21 @@ public class MailListHtmlBuilder implements HtmlBuilder
 
     private String buildMailRow(MockMail mail)
     {
-        String output =
-                        "<tr>\n" +
-                        "  <td>" + StringEscapeUtils.escapeHtml4(mail.getFrom()) + "</td>\n" +
-                        "  <td>" + StringEscapeUtils.escapeHtml4(mail.getTo()) + "</td>\n" +
-                        "  <td><a href=\"/view/" + mail.getId() + "\">" + StringEscapeUtils.escapeHtml4(mail.getSubject()) + "</a></td>\n" +
-                        "</tr>";
+        StringFromHtmlBuilder fromBuilder = new StringFromHtmlBuilder();
+        fromBuilder.setMockMail(mail);
+        String fromOutput = fromBuilder.build();
 
-        return output;
+        StringRecipientHtmlBuilder recipientBuilder = new StringRecipientHtmlBuilder();
+        recipientBuilder.setMaxLength(27);
+        recipientBuilder.setMockMail(mail);
+        recipientBuilder.setRecipientType(MimeMessage.RecipientType.TO);
+        String toOutput = recipientBuilder.build();
+
+        return
+            "<tr>\n" +
+            "  <td>" + fromOutput + "</td>\n" +
+            "  <td>" + toOutput + "</td>\n" +
+            "  <td><a title=\"" + StringEscapeUtils.escapeHtml4(mail.getSubject()) + "\" href=\"/view/" + mail.getId() + "\">" + StringEscapeUtils.escapeHtml4(mail.getSubject()) + "</a></td>\n" +
+            "</tr>";
     }
 }
