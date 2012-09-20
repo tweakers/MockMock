@@ -60,11 +60,21 @@ public class MailListHtmlBuilder implements HtmlBuilder
         recipientBuilder.setRecipientType(MimeMessage.RecipientType.TO);
         String toOutput = recipientBuilder.build();
 
+        String subjectOutput;
+        if(mail.getSubject() == null)
+        {
+            subjectOutput = "<em>No subject given</em>";
+        }
+        else
+        {
+            subjectOutput = StringEscapeUtils.escapeHtml4(mail.getSubject());
+        }
+
         return
             "<tr>\n" +
             "  <td>" + fromOutput + "</td>\n" +
             "  <td>" + toOutput + "</td>\n" +
-            "  <td><a title=\"" + StringEscapeUtils.escapeHtml4(mail.getSubject()) + "\" href=\"/view/" + mail.getId() + "\">" + StringEscapeUtils.escapeHtml4(mail.getSubject()) + "</a></td>\n" +
+            "  <td><a title=\"" + StringEscapeUtils.escapeHtml4(mail.getSubject()) + "\" href=\"/view/" + mail.getId() + "\">" + subjectOutput + "</a></td>\n" +
             "</tr>";
     }
 }

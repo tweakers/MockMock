@@ -33,6 +33,10 @@ public class StringRecipientHtmlBuilder implements HtmlBuilder
 
             if(addresses == null)
             {
+                if(recipientType == MimeMessage.RecipientType.TO)
+                {
+                    return mockMail.getTo();
+                }
                 return "";
             }
 

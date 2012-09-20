@@ -11,6 +11,8 @@ import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
 
@@ -125,6 +127,10 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         @Override
         public void done()
         {
+            // set the received date
+            Timestamp currentTimestamp = new Timestamp(Calendar.getInstance().getTime().getTime());
+            mockMail.setReceivedTime(currentTimestamp.getTime());
+
             System.out.println("Finished");
             MailQueue.add(mockMail);
         }

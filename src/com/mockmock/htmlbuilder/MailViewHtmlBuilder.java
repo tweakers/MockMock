@@ -20,10 +20,20 @@ public class MailViewHtmlBuilder implements HtmlBuilder
         AddressesHtmlBuilder addressesHtmlBuilder = new AddressesHtmlBuilder();
         addressesHtmlBuilder.setMockMail(mockMail);
 
+        String subjectOutput;
+        if(mockMail.getSubject() == null)
+        {
+            subjectOutput = "<em>No subject given</em>";
+        }
+        else
+        {
+            subjectOutput = StringEscapeUtils.escapeHtml4(mockMail.getSubject());
+        }
+
         String output = "<div class=\"container\">\n";
 
         output +=
-                "<h2>" + StringEscapeUtils.escapeHtml4(mockMail.getSubject()) + "</h2>\n" +
+                "<h2>" + subjectOutput + "</h2>\n" +
                 "  <div class=\"row\">\n";
 
         output +=

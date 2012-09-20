@@ -19,16 +19,23 @@ public class StringFromHtmlBuilder implements HtmlBuilder
         try
         {
             Address[] addresses = mimeMessage.getFrom();
-            int i = 1;
-            for(Address address : addresses)
+            if(addresses != null)
             {
-                output += StringEscapeUtils.escapeHtml4(address.toString());
-                if(addresses.length != i)
+                int i = 1;
+                for(Address address : addresses)
                 {
-                    output += ", ";
-                }
+                    output += StringEscapeUtils.escapeHtml4(address.toString());
+                    if(addresses.length != i)
+                    {
+                        output += ", ";
+                    }
 
-                i++;
+                    i++;
+                }
+            }
+            else
+            {
+                output += StringEscapeUtils.escapeHtml4(mockMail.getFrom());
             }
         }
         catch (MessagingException e)

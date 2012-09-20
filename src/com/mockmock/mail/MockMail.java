@@ -1,8 +1,6 @@
 package com.mockmock.mail;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.Date;
 
 public class MockMail implements Comparable<MockMail>
 {
@@ -14,6 +12,7 @@ public class MockMail implements Comparable<MockMail>
     private String bodyHtml;
     private String rawMail;
     private MimeMessage mimeMessage;
+    private long receivedTime;
 
     public long getId()
     {
@@ -98,22 +97,20 @@ public class MockMail implements Comparable<MockMail>
     @Override
     public int compareTo(MockMail o)
     {
-        try
-        {
-            Date sentDate = mimeMessage.getSentDate();
-            long sentTime = sentDate.getTime();
+        long receivedTime = this.getReceivedTime();
+        long receivedTime2 = o.getReceivedTime();
 
-            Date sentDate2 = o.getMimeMessage().getSentDate();
-            long receivedTime2 = sentDate2.getTime();
+        long diff = receivedTime - receivedTime2;
+        return (int) diff;
+    }
 
-            long diff = sentTime - receivedTime2;
-            return (int) diff;
-        }
-        catch (MessagingException e)
-        {
-            e.printStackTrace();
-        }
+    public long getReceivedTime()
+    {
+        return receivedTime;
+    }
 
-        return 0;
+    public void setReceivedTime(long receivedTime)
+    {
+        this.receivedTime = receivedTime;
     }
 }
