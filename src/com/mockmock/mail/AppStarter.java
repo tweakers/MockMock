@@ -1,5 +1,6 @@
 package com.mockmock.mail;
 
+import com.mockmock.http.DeleteHandler;
 import com.mockmock.http.IndexHandler;
 import com.mockmock.http.MailDetailHandler;
 import org.apache.commons.cli.*;
@@ -54,6 +55,7 @@ public class AppStarter
         Handler[] handlers = {
             new IndexHandler(),
             new MailDetailHandler(),
+            new DeleteHandler(),
             resourceHandler
         };
         HandlerList handlerList = new HandlerList();

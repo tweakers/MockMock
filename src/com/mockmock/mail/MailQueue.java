@@ -33,4 +33,9 @@ public class MailQueue
 
         return null;
     }
+
+    public static void emptyQueue()
+    {
+        mailQueue = new ArrayList<>();
+    }
 }
