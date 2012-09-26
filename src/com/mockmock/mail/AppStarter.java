@@ -10,6 +10,8 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.subethamail.smtp.server.SMTPServer;
 
+import java.io.File;
+
 public class AppStarter
 {
     public static final float VERSION_NUMBER = 1.0f;
@@ -50,8 +52,12 @@ public class AppStarter
 
         Server http = new Server(httpPort);
 
+        // get the directory we're in
+        String path = AppStarter.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        path = new File(path).getParent();
+
         ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase("./static");
+        resourceHandler.setResourceBase(path + "/static");
         Handler[] handlers = {
             new IndexHandler(),
             new MailDetailHandler(),
