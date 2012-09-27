@@ -3,6 +3,17 @@ What is MockMock?
 
 MockMock is a mock SMTP server that allows you to test if outgoing emails are sent and what they look like. It provides a web interface that displays which emails were sent and shows you what the contents of those emails are. If you use MockMock you can be sure that your outgoing emails will not reach customers or users by accident. It really just is a mock SMTP server and has no email sending functionality.
 
+Mail overview page
+------------------
+
+![Mail overview page](https://raw.github.com/koku/MockMock/master/extra/mockmock1.png "The mail overview page shows you all received mails")
+
+
+Mail detail page
+----------------
+
+![Mail detail page](https://raw.github.com/koku/MockMock/master/extra/mockmock2.png "The mail detail page shows you all info about a mail, like headers, content, html content, etc")
+
 
 Requirements
 ============
