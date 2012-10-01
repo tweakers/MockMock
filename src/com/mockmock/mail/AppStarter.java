@@ -26,6 +26,11 @@ public class AppStarter
      */
     private static int httpPort = 8282;
 
+    /**
+     * The maximum size the mail queue may be.
+     */
+    public static int maxMailQueueSize = 1000;
+
 
     public static void main(String[] args)
     {
@@ -52,12 +57,18 @@ public class AppStarter
 
         Server http = new Server(httpPort);
 
-        // get the directory we're in
-        String path = AppStarter.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        path = new File(path).getParent();
+        // get the path to the "static" folder. If it doesn't exists, check if it's in the folder of the file being
+        // executed
+        String path = "./static";
+        if(!new File(path).exists())
+        {
+            // get the directory we're in
+            path = AppStarter.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+            path = new File(path).getParent() + "/static";
+        }
 
         ResourceHandler resourceHandler = new ResourceHandler();
-        resourceHandler.setResourceBase(path + "/static");
+        resourceHandler.setResourceBase(path);
         Handler[] handlers = {
             new IndexHandler(),
             new MailDetailHandler(),
@@ -88,8 +99,9 @@ public class AppStarter
     {
         // define the possible options
         Options options = new Options();
-        options.addOption("p", true, "The mail port number to use");
-        options.addOption("h", true, "The http port number to use");
+        options.addOption("p", true, "The mail port number to use. Default is 25000.");
+        options.addOption("h", true, "The http port number to use. Default is 8282.");
+        options.addOption("m", true, "The maximum size of the mail qeueue. Default is 1000.");
         options.addOption("?", false, "Shows this help information");
 
         // parse the given arguments
@@ -128,6 +140,18 @@ public class AppStarter
                     catch (NumberFormatException e)
                     {
                         System.err.println("Invalid http port given, using default " + httpPort);
+                    }
+                }
+
+                if(cmd.hasOption("m"))
+                {
+                    try
+                    {
+                        maxMailQueueSize = Integer.valueOf(cmd.getOptionValue("m"));
+                    }
+                    catch (NumberFormatException e)
+                    {
+                        System.err.println("Invalid max mail queue size given, using default " + maxMailQueueSize);
                     }
                 }
             }
