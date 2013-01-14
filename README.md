@@ -1,7 +1,7 @@
-What is MockMock?
-=================
+MockMock :: Mock SMTP Server
+============================
 
-MockMock is a mock SMTP server that allows you to test if outgoing emails are sent and what they look like. It provides a web interface that displays which emails were sent and shows you what the contents of those emails are. If you use MockMock you can be sure that your outgoing emails will not reach customers or users by accident. It really just is a mock SMTP server and has no email sending functionality.
+MockMock is a cross-platform SMTP server built on Java. It allows you to test if outgoing emails are sent (without actually sending them) and to see what they look like. It provides a web interface that displays which emails were sent and shows you what the contents of those emails are. If you use MockMock you can be sure that your outgoing emails will not reach customers or users by accident. It really just is a mock SMTP server and has no email sending functionality.
 
 Mail overview page
 ------------------
