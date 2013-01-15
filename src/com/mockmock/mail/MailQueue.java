@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 public class MailQueue
 {
-    private static ArrayList<MockMail> mailQueue = new ArrayList<>();
+    private static ArrayList<MockMail> mailQueue = new ArrayList<MockMail>();
 
     /**
      * Add a MockMail to the queue. Queue is sorted and trimmed right after it.
