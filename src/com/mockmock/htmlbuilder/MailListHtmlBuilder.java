@@ -1,7 +1,7 @@
 package com.mockmock.htmlbuilder;
 
 import com.mockmock.mail.MockMail;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
@@ -67,14 +67,14 @@ public class MailListHtmlBuilder implements HtmlBuilder
         }
         else
         {
-            subjectOutput = StringEscapeUtils.escapeHtml4(mail.getSubject());
+            subjectOutput = StringEscapeUtils.escapeHtml(mail.getSubject());
         }
 
         return
             "<tr>\n" +
             "  <td>" + fromOutput + "</td>\n" +
             "  <td>" + toOutput + "</td>\n" +
-            "  <td><a title=\"" + StringEscapeUtils.escapeHtml4(mail.getSubject()) + "\" href=\"/view/" + mail.getId() + "\">" + subjectOutput + "</a></td>\n" +
+            "  <td><a title=\"" + StringEscapeUtils.escapeHtml(mail.getSubject()) + "\" href=\"/view/" + mail.getId() + "\">" + subjectOutput + "</a></td>\n" +
             "</tr>";
     }
 }
