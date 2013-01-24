@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>MockMock</name>
-    <description></description>
+    <description>Mock SMTP Server</description>
     <inceptionYear>2012</inceptionYear>
     <url>https://github.com/koku/MockMock</url>
 

@@ -73,7 +73,7 @@ public class MailViewHtmlBuilder implements HtmlBuilder
 			output +=
 					"    <div class=\"span10\">\n" +
 							"       <h3>Complete raw mail output</h3>\n" +
-							"       <p class=\"well\">" + StringEscapeUtils.escapeHtml4(mockMail.getRawMail()).replaceAll("\n", "<br />") + "</p>\n" +
+							"       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getRawMail()).replaceAll("\n", "<br />") + "</p>\n" +
 							"    </div>\n";
 		}
 
