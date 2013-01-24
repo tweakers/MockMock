@@ -1,5 +1,6 @@
 package com.mockmock.mail;
 
+import com.mockmock.AppStarter;
 import org.junit.Assert;
 import org.junit.Test;
 

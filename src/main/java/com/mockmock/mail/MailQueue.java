@@ -1,5 +1,7 @@
 package com.mockmock.mail;
 
+import com.mockmock.AppStarter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;

@@ -14,5 +14,5 @@ Class-Path: junit-4.5.jar mail.jar slf4j-api-1.6.1.jar slf4j-simple-1.
  20910.jar jetty-servlets-8.1.7.v20120910.jar jetty-util-8.1.7.v201209
  10.jar jetty-webapp-8.1.7.v20120910.jar jetty-websocket-8.1.7.v201209
  10.jar jetty-xml-8.1.7.v20120910.jar servlet-api-3.0.jar
-Main-Class: com.mockmock.mail.AppStarter
+Main-Class: com.mockmock.AppStarter
 

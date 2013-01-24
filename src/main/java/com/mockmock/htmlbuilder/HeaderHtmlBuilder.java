@@ -1,6 +1,6 @@
 package com.mockmock.htmlbuilder;
 
-import com.mockmock.mail.AppStarter;
+import com.mockmock.AppStarter;
 
 public class HeaderHtmlBuilder implements HtmlBuilder
 {

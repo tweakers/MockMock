@@ -41,7 +41,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.mockmock.mail.AppStarter</mainClass>
+                            <mainClass>com.mockmock.AppStarter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -98,6 +98,12 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
+            <version>8.1.8.v20121106</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
             <version>8.1.8.v20121106</version>
         </dependency>
 
