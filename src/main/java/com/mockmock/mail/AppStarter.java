@@ -109,7 +109,7 @@ public class AppStarter
 
         try
         {
-            CommandLine cmd = parser.parse( options, args);
+            CommandLine cmd = parser.parse(options, args);
 
             if(cmd.hasOption("?"))
             {
@@ -117,42 +117,40 @@ public class AppStarter
                 formatter.printHelp( "java -jar MockMock.jar -p 25000 -h 8282", options );
                 System.exit(0);
             }
-            else
+
+            if(cmd.hasOption("p"))
             {
-                if(cmd.hasOption("p"))
+                try
                 {
-                    try
-                    {
-                        smtpPort = Integer.valueOf(cmd.getOptionValue("p"));
-                    }
-                    catch (NumberFormatException e)
-                    {
-                        System.err.println("Invalid mail port given, using default " + smtpPort);
-                    }
+                    smtpPort = Integer.valueOf(cmd.getOptionValue("p"));
                 }
-
-                if(cmd.hasOption("h"))
+                catch (NumberFormatException e)
                 {
-                    try
-                    {
-                        httpPort = Integer.valueOf(cmd.getOptionValue("h"));
-                    }
-                    catch (NumberFormatException e)
-                    {
-                        System.err.println("Invalid http port given, using default " + httpPort);
-                    }
+                    System.err.println("Invalid mail port given, using default " + smtpPort);
                 }
+            }
 
-                if(cmd.hasOption("m"))
+            if(cmd.hasOption("h"))
+            {
+                try
                 {
-                    try
-                    {
-                        maxMailQueueSize = Integer.valueOf(cmd.getOptionValue("m"));
-                    }
-                    catch (NumberFormatException e)
-                    {
-                        System.err.println("Invalid max mail queue size given, using default " + maxMailQueueSize);
-                    }
+                    httpPort = Integer.valueOf(cmd.getOptionValue("h"));
+                }
+                catch (NumberFormatException e)
+                {
+                    System.err.println("Invalid http port given, using default " + httpPort);
+                }
+            }
+
+            if(cmd.hasOption("m"))
+            {
+                try
+                {
+                    maxMailQueueSize = Integer.valueOf(cmd.getOptionValue("m"));
+                }
+                catch (NumberFormatException e)
+                {
+                    System.err.println("Invalid max mail queue size given, using default " + maxMailQueueSize);
                 }
             }
         }
