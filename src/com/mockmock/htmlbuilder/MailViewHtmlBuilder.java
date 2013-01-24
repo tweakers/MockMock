@@ -1,7 +1,7 @@
 package com.mockmock.htmlbuilder;
 
 import com.mockmock.mail.MockMail;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 
 public class MailViewHtmlBuilder implements HtmlBuilder
 {
@@ -27,7 +27,7 @@ public class MailViewHtmlBuilder implements HtmlBuilder
         }
         else
         {
-            subjectOutput = StringEscapeUtils.escapeHtml4(mockMail.getSubject());
+            subjectOutput = StringEscapeUtils.escapeHtml(mockMail.getSubject());
         }
 
         String output = "<div class=\"container\">\n";
@@ -53,7 +53,7 @@ public class MailViewHtmlBuilder implements HtmlBuilder
             output +=
                     "    <div class=\"span10\">\n" +
                     "       <h3>Plain text body</h3>\n" +
-                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml4(mockMail.getBody()).replaceAll("\n", "<br />") + "</p>\n" +
+                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBody()).replaceAll("\n", "<br />") + "</p>\n" +
                     "    </div>\n";
         }
 
@@ -62,7 +62,7 @@ public class MailViewHtmlBuilder implements HtmlBuilder
             output +=
                     "    <div class=\"span10\">\n" +
                     "       <h3>HTML body</h3>\n" +
-                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml4(mockMail.getBodyHtml()).replaceAll("\n", "<br />") + "</p>\n" +
+                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()).replaceAll("\n", "<br />") + "</p>\n" +
                     "    </div>\n";
         }
 
