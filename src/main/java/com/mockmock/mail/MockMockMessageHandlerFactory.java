@@ -1,5 +1,6 @@
 package com.mockmock.mail;
 
+import com.google.common.eventbus.EventBus;
 import org.joda.time.DateTime;
 import org.subethamail.smtp.MessageContext;
 import org.subethamail.smtp.MessageHandler;
@@ -19,6 +20,13 @@ import java.util.Properties;
 
 public class MockMockMessageHandlerFactory implements MessageHandlerFactory
 {
+    private EventBus eventBus;
+
+    public MockMockMessageHandlerFactory(EventBus eventBus)
+    {
+        this.eventBus = eventBus;
+    }
+
     @Override
     public MessageHandler create(MessageContext messageContext)
     {
@@ -132,7 +140,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
             mockMail.setReceivedTime(currentTimestamp.getTime());
 
             System.out.println("Finished");
-            MailQueue.add(mockMail);
+            eventBus.post(mockMail);
         }
 
         /**

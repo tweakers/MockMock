@@ -1,10 +1,12 @@
 package com.mockmock;
 
+import com.google.common.eventbus.EventBus;
+import com.mockmock.mail.MailQueue;
 import org.apache.commons.cli.*;
 
 public class AppStarter
 {
-    public static final float VERSION_NUMBER = 1.0f;
+    public static final float VERSION_NUMBER = 1.1f;
 
     /**
      * The default port where MockMock will run on
@@ -21,13 +23,15 @@ public class AppStarter
      */
     public static int maxMailQueueSize = 1000;
 
-
     public static void main(String[] args)
     {
         // get the parameters that are allowed
         parseOptions(args);
 
-        Server smtpServer = new SmtpServer(smtpPort);
+        EventBus eventBus = new EventBus();
+        eventBus.register(new MailQueue());
+
+        Server smtpServer = new SmtpServer(smtpPort, eventBus);
         smtpServer.start();
 
         Server httpServer = new HttpServer(httpPort);

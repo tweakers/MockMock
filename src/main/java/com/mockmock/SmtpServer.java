@@ -1,15 +1,18 @@
 package com.mockmock;
 
+import com.google.common.eventbus.EventBus;
 import com.mockmock.mail.MockMockMessageHandlerFactory;
 import org.subethamail.smtp.server.SMTPServer;
 
 public class SmtpServer implements Server
 {
     private int port;
+    private EventBus eventBus;
 
-    public SmtpServer(int port)
+    public SmtpServer(int port, EventBus eventBus)
     {
         this.port = port;
+        this.eventBus = eventBus;
     }
 
     public void setPort(int port)
@@ -20,7 +23,7 @@ public class SmtpServer implements Server
     public void start()
     {
         // this handles every message that is received
-        MockMockMessageHandlerFactory handlerFactory = new MockMockMessageHandlerFactory();
+        MockMockMessageHandlerFactory handlerFactory = new MockMockMessageHandlerFactory(this.eventBus);
 
         // start the smtp server!
         SMTPServer server = new SMTPServer(handlerFactory);
