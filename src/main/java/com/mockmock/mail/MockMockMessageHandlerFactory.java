@@ -1,5 +1,6 @@
 package com.mockmock.mail;
 
+import org.joda.time.DateTime;
 import org.subethamail.smtp.MessageContext;
 import org.subethamail.smtp.MessageHandler;
 import org.subethamail.smtp.MessageHandlerFactory;
@@ -39,8 +40,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
             this.mockMail = new MockMail();
 
             // give the mockmail a unique id (currently its just a timestamp in ms)
-            GregorianCalendar cal = new GregorianCalendar();
-            this.mockMail.setId(cal.getTimeInMillis());
+            this.mockMail.setId(DateTime.now().getMillis());
         }
 
         /**
