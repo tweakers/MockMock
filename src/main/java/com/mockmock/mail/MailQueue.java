@@ -1,5 +1,8 @@
 package com.mockmock.mail;
 
+import com.google.common.eventbus.Subscribe;
+import com.mockmock.AppStarter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
@@ -7,6 +10,12 @@ import java.util.ListIterator;
 public class MailQueue
 {
     private static ArrayList<MockMail> mailQueue = new ArrayList<MockMail>();
+
+    @Subscribe
+    public void recordMailQueueAddition(MockMail mail)
+    {
+        MailQueue.add(mail);
+    }
 
     /**
      * Add a MockMail to the queue. Queue is sorted and trimmed right after it.
