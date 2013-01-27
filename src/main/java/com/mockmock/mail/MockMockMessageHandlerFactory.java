@@ -13,9 +13,6 @@ import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Properties;
 
 public class MockMockMessageHandlerFactory implements MessageHandlerFactory
@@ -32,7 +29,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
     {
         return new MockMockHandler(messageContext);
     }
-    
+
     class MockMockHandler implements MessageHandler
     {
         MessageContext context;
@@ -87,7 +84,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         {
             String rawMail = this.convertStreamToString(data);
             mockMail.setRawMail(rawMail);
-            
+
             Session session = Session.getDefaultInstance(new Properties());
             InputStream is = new ByteArrayInputStream(rawMail.getBytes());
 
@@ -125,7 +122,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
             {
                 e.printStackTrace();
             }
-            
+
             System.out.println("MAIL DATA");
             System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
             System.out.println(mockMail.getRawMail());
@@ -136,8 +133,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         public void done()
         {
             // set the received date
-            Timestamp currentTimestamp = new Timestamp(Calendar.getInstance().getTime().getTime());
-            mockMail.setReceivedTime(currentTimestamp.getTime());
+            mockMail.setReceivedTime(DateTime.now().getMillis());
 
             System.out.println("Finished");
             eventBus.post(mockMail);
@@ -152,7 +148,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder stringBuilder = new StringBuilder();
-            
+
             String line;
             try
             {
@@ -162,11 +158,11 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
                     stringBuilder.append("\n");
                 }
             }
-            catch (IOException e) 
+            catch (IOException e)
             {
                 e.printStackTrace();
             }
-            
+
             return stringBuilder.toString();
         }
     }
