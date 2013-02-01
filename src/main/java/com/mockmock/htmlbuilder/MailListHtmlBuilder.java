@@ -2,10 +2,12 @@ package com.mockmock.htmlbuilder;
 
 import com.mockmock.mail.MockMail;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 
+@Service
 public class MailListHtmlBuilder implements HtmlBuilder
 {
     private ArrayList<MockMail> mailQueue;

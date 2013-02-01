@@ -2,29 +2,28 @@ package com.mockmock;
 
 import com.google.common.eventbus.EventBus;
 import com.mockmock.mail.MockMockMessageHandlerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.subethamail.smtp.server.SMTPServer;
 
+@Service
 public class SmtpServer implements Server
 {
     private int port;
-    private EventBus eventBus;
-
-    public SmtpServer(int port, EventBus eventBus)
-    {
-        this.port = port;
-        this.eventBus = eventBus;
-    }
+    private MockMockMessageHandlerFactory handlerFactory;
 
     public void setPort(int port)
     {
         this.port = port;
     }
 
+    @Autowired
+    public void setHandlerFactory(MockMockMessageHandlerFactory handlerFactory) {
+        this.handlerFactory = handlerFactory;
+    }
+
     public void start()
     {
-        // this handles every message that is received
-        MockMockMessageHandlerFactory handlerFactory = new MockMockMessageHandlerFactory(this.eventBus);
-
         // start the smtp server!
         SMTPServer server = new SMTPServer(handlerFactory);
         server.setSoftwareName("MockMock SMTP Server version " + AppStarter.VERSION_NUMBER);

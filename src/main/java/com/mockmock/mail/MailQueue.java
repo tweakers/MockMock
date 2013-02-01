@@ -2,11 +2,13 @@ package com.mockmock.mail;
 
 import com.google.common.eventbus.Subscribe;
 import com.mockmock.AppStarter;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
 
+@Service
 public class MailQueue
 {
     private static ArrayList<MockMail> mailQueue = new ArrayList<MockMail>();

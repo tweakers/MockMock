@@ -1,8 +1,9 @@
 package com.mockmock;
 
-import com.google.common.eventbus.EventBus;
-import com.mockmock.mail.MailQueue;
 import org.apache.commons.cli.*;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class AppStarter
 {
@@ -25,16 +26,18 @@ public class AppStarter
 
     public static void main(String[] args)
     {
+        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/beans.xml");
+        BeanFactory factory = context;
+
         // get the parameters that are allowed
         parseOptions(args);
 
-        EventBus eventBus = new EventBus();
-        eventBus.register(new MailQueue());
-
-        Server smtpServer = new SmtpServer(smtpPort, eventBus);
+        Server smtpServer = (Server) factory.getBean("smtpServer");
+        smtpServer.setPort(smtpPort);
         smtpServer.start();
 
-        Server httpServer = new HttpServer(httpPort);
+        Server httpServer = (Server) factory.getBean("httpServer");
+        httpServer.setPort(httpPort);
         httpServer.start();
     }
 

@@ -6,6 +6,8 @@ import com.mockmock.htmlbuilder.MailViewHtmlBuilder;
 import com.mockmock.mail.MailQueue;
 import com.mockmock.mail.MockMail;
 import org.eclipse.jetty.server.Request;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +16,14 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Service
 public class MailDetailHandler extends BaseHandler
 {
     private String pattern = "^/view/([0-9]+)/?$";
+
+    private HeaderHtmlBuilder headerHtmlBuilder;
+    private FooterHtmlBuilder footerHtmlBuilder;
+    private MailViewHtmlBuilder mailViewHtmlBuilder;
 
     @Override
     public void handle(String target, Request request, HttpServletRequest httpServletRequest,
@@ -41,14 +48,11 @@ public class MailDetailHandler extends BaseHandler
 
         setDefaultResponseOptions(response);
 
-        HeaderHtmlBuilder headerHtmlBuilder = new HeaderHtmlBuilder();
         String header = headerHtmlBuilder.build();
 
-        MailViewHtmlBuilder mailViewHtmlBuilder = new MailViewHtmlBuilder();
         mailViewHtmlBuilder.setMockMail(mockMail);
         String body = mailViewHtmlBuilder.build();
 
-        FooterHtmlBuilder footerHtmlBuilder = new FooterHtmlBuilder();
         String footer = footerHtmlBuilder.build();
 
         response.getWriter().print(header + body + footer);
@@ -90,5 +94,20 @@ public class MailDetailHandler extends BaseHandler
         }
 
         return 0;
+    }
+
+    @Autowired
+    public void setHeaderHtmlBuilder(HeaderHtmlBuilder headerHtmlBuilder) {
+        this.headerHtmlBuilder = headerHtmlBuilder;
+    }
+
+    @Autowired
+    public void setFooterHtmlBuilder(FooterHtmlBuilder footerHtmlBuilder) {
+        this.footerHtmlBuilder = footerHtmlBuilder;
+    }
+
+    @Autowired
+    public void setMailViewHtmlBuilder(MailViewHtmlBuilder mailViewHtmlBuilder) {
+        this.mailViewHtmlBuilder = mailViewHtmlBuilder;
     }
 }
