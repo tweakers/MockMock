@@ -1,6 +1,7 @@
 package com.mockmock.mail;
 
 import com.mockmock.AppStarter;
+import com.mockmock.Settings;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,64 +11,73 @@ public class MailQueueTest
     public void testEmptyQueue()
     {
         MockMail mail = new MockMail();
-        MailQueue.add(mail);
-        Assert.assertFalse(MailQueue.getMailQueue().isEmpty());
+        MailQueue mailQueue = new MailQueue();
+        mailQueue.setSettings(new Settings());
+        mailQueue.add(mail);
+        Assert.assertFalse(mailQueue.getMailQueue().isEmpty());
 
-        MailQueue.emptyQueue();
-        Assert.assertTrue(MailQueue.getMailQueue().isEmpty());
+        mailQueue.emptyQueue();
+        Assert.assertTrue(mailQueue.getMailQueue().isEmpty());
     }
 
     @Test
     public void testAdd()
     {
-        MailQueue.emptyQueue();
+        MailQueue mailQueue = new MailQueue();
+        mailQueue.setSettings(new Settings());
+        mailQueue.emptyQueue();
 
         MockMail mail = new MockMail();
-        MailQueue.add(mail);
+        mailQueue.add(mail);
 
-        Assert.assertTrue(MailQueue.getMailQueue().size() == 1);
+        Assert.assertTrue(mailQueue.getMailQueue().size() == 1);
     }
 
     @Test
     public void testMultipleAdd()
     {
-        MailQueue.emptyQueue();
+        Settings settings = new Settings();
+        MailQueue mailQueue = new MailQueue();
+        mailQueue.setSettings(settings);
+        mailQueue.emptyQueue();
 
-        for (int i = 0; i < AppStarter.maxMailQueueSize; i++)
+        for (int i = 0; i < settings.getMaxMailQueueSize(); i++)
         {
             MockMail mail = new MockMail();
-            MailQueue.add(mail);
+            mailQueue.add(mail);
         }
 
-        Assert.assertTrue(MailQueue.getMailQueue().size() == AppStarter.maxMailQueueSize);
+        Assert.assertTrue(mailQueue.getMailQueue().size() == settings.getMaxMailQueueSize());
 
         for (int i = 0; i < 10; i++)
         {
             MockMail mail = new MockMail();
-            MailQueue.add(mail);
+            mailQueue.add(mail);
         }
 
-        Assert.assertTrue(MailQueue.getMailQueue().size() == AppStarter.maxMailQueueSize);
+        Assert.assertTrue(mailQueue.getMailQueue().size() == settings.getMaxMailQueueSize());
     }
 
     @Test
     public void testGetById()
     {
-        MailQueue.emptyQueue();
+        MailQueue mailQueue = new MailQueue();
+        mailQueue.setSettings(new Settings());
+        mailQueue.emptyQueue();
 
         long id = 23986;
         MockMail mail = new MockMail();
         mail.setId(id);
         mail.setSubject("Test subject");
-        MailQueue.add(mail);
+        mailQueue.add(mail);
 
         long id2 = 87632;
         MockMail mail2 = new MockMail();
         mail2.setId(id2);
         mail2.setSubject("Test subject 2");
-        MailQueue.add(mail2);
+        mailQueue.add(mail2);
 
-        Assert.assertEquals(mail, MailQueue.getById(id));
-        Assert.assertEquals(mail2, MailQueue.getById(id2));
+        Assert.assertEquals(mail, mailQueue.getById(id));
+        Assert.assertEquals(mail2, mailQueue.getById(id2));
     }
 }

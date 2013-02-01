@@ -1,9 +1,11 @@
 package com.mockmock.htmlbuilder;
 
 import com.mockmock.mail.MockMail;
+import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
 
+@Service
 public class AddressesHtmlBuilder implements HtmlBuilder
 {
     private MockMail mockMail;
