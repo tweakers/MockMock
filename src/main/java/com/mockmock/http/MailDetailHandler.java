@@ -25,6 +25,8 @@ public class MailDetailHandler extends BaseHandler
     private FooterHtmlBuilder footerHtmlBuilder;
     private MailViewHtmlBuilder mailViewHtmlBuilder;
 
+    private MailQueue mailQueue;
+
     @Override
     public void handle(String target, Request request, HttpServletRequest httpServletRequest,
                        HttpServletResponse response) throws IOException, ServletException
@@ -40,7 +42,7 @@ public class MailDetailHandler extends BaseHandler
             return;
         }
 
-        MockMail mockMail = MailQueue.getById(mailId);
+        MockMail mockMail = this.mailQueue.getById(mailId);
         if(mockMail == null)
         {
             return;
@@ -109,5 +111,10 @@ public class MailDetailHandler extends BaseHandler
     @Autowired
     public void setMailViewHtmlBuilder(MailViewHtmlBuilder mailViewHtmlBuilder) {
         this.mailViewHtmlBuilder = mailViewHtmlBuilder;
+    }
+
+    @Autowired
+    public void setMailQueue(MailQueue mailQueue) {
+        this.mailQueue = mailQueue;
     }
 }

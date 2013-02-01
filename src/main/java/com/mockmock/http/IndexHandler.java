@@ -20,6 +20,8 @@ public class IndexHandler extends BaseHandler
     private FooterHtmlBuilder footerHtmlBuilder;
     private MailListHtmlBuilder mailListHtmlBuilder;
 
+    private MailQueue mailQueue;
+
     @Override
     public void handle(String target, Request request, HttpServletRequest httpServletRequest,
                        HttpServletResponse response) throws IOException, ServletException
@@ -33,7 +35,7 @@ public class IndexHandler extends BaseHandler
 
         String header = headerHtmlBuilder.build();
 
-        mailListHtmlBuilder.setMailQueue(MailQueue.getMailQueue());
+        mailListHtmlBuilder.setMailQueue(mailQueue.getMailQueue());
         String body = mailListHtmlBuilder.build();
 
         String footer = footerHtmlBuilder.build();
@@ -56,5 +58,10 @@ public class IndexHandler extends BaseHandler
     @Autowired
     public void setMailListHtmlBuilder(MailListHtmlBuilder mailListHtmlBuilder) {
         this.mailListHtmlBuilder = mailListHtmlBuilder;
+    }
+
+    @Autowired
+    public void setMailQueue(MailQueue mailQueue) {
+        this.mailQueue = mailQueue;
     }
 }

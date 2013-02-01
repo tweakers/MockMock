@@ -1,5 +1,6 @@
-package com.mockmock;
+package com.mockmock.server;
 
+import com.mockmock.AppStarter;
 import com.mockmock.http.DeleteHandler;
 import com.mockmock.http.IndexHandler;
 import com.mockmock.http.MailDetailHandler;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 
 @Service
-public class HttpServer implements com.mockmock.Server
+public class HttpServer implements com.mockmock.server.Server
 {
     private int port;
 

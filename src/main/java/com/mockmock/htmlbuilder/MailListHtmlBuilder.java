@@ -29,7 +29,7 @@ public class MailListHtmlBuilder implements HtmlBuilder
         else
         {
             String mailText = mailQueue.size() == 1 ? "mail" : "mails";
-            output += "  <h1>I've got " + mailQueue.size() + " " + mailText + " for you. Nice! <small class=\"deleteLink\"><a class=\"delete\" href=\"#\">Delete all</a></small></h1>\n";
+            output += "  <h1>I've got " + mailQueue.size() + " " + mailText + " for you. Nice! <small class=\"deleteLink\"><a class=\"delete\" href=\"/mail/delete/all\">Delete all</a></small></h1>\n";
             output += "  <table class=\"table table-striped\">\n";
             output += "    <thead>\n";
             output += "      <th>From</th>\n";
