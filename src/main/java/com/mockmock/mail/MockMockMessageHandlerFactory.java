@@ -2,6 +2,8 @@ package com.mockmock.mail;
 
 import com.google.common.eventbus.EventBus;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.subethamail.smtp.MessageContext;
 import org.subethamail.smtp.MessageHandler;
 import org.subethamail.smtp.MessageHandlerFactory;
@@ -15,10 +17,12 @@ import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.util.Properties;
 
+@Service
 public class MockMockMessageHandlerFactory implements MessageHandlerFactory
 {
     private EventBus eventBus;
 
+    @Autowired
     public MockMockMessageHandlerFactory(EventBus eventBus)
     {
         this.eventBus = eventBus;

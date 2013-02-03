@@ -1,5 +1,6 @@
-package com.mockmock;
+package com.mockmock.server;
 
+import com.mockmock.AppStarter;
 import com.mockmock.http.DeleteHandler;
 import com.mockmock.http.IndexHandler;
 import com.mockmock.http.MailDetailHandler;
@@ -7,17 +8,19 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 
-public class HttpServer implements com.mockmock.Server
+@Service
+public class HttpServer implements com.mockmock.server.Server
 {
     private int port;
 
-    public HttpServer(int port)
-    {
-        this.port = port;
-    }
+    private IndexHandler indexHandler;
+    private MailDetailHandler mailDetailHandler;
+    private DeleteHandler deleteHandler;
 
     public void setPort(int port)
     {
@@ -42,9 +45,9 @@ public class HttpServer implements com.mockmock.Server
         resourceHandler.setResourceBase(path);
 
         Handler[] handlers = {
-                new IndexHandler(),
-                new MailDetailHandler(),
-                new DeleteHandler(),
+                this.indexHandler,
+                this.mailDetailHandler,
+                this.deleteHandler,
             resourceHandler
         };
         HandlerList handlerList = new HandlerList();
@@ -61,5 +64,20 @@ public class HttpServer implements com.mockmock.Server
         {
             System.err.println("Could not start http server. Maybe port " + port + " is already in use?");
         }
+    }
+
+    @Autowired
+    public void setIndexHandler(IndexHandler indexHandler) {
+        this.indexHandler = indexHandler;
+    }
+
+    @Autowired
+    public void setMailDetailHandler(MailDetailHandler mailDetailHandler) {
+        this.mailDetailHandler = mailDetailHandler;
+    }
+
+    @Autowired
+    public void setDeleteHandler(DeleteHandler deleteHandler) {
+        this.deleteHandler = deleteHandler;
     }
 }

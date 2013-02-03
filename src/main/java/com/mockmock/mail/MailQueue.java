@@ -2,26 +2,27 @@ package com.mockmock.mail;
 
 import com.google.common.eventbus.Subscribe;
 import com.mockmock.AppStarter;
+import com.mockmock.Settings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
 
+@Service
 public class MailQueue
 {
-    private static ArrayList<MockMail> mailQueue = new ArrayList<MockMail>();
+    private static ArrayList<MockMail> mailQueue = new ArrayList<>();
 
-    @Subscribe
-    public void recordMailQueueAddition(MockMail mail)
-    {
-        MailQueue.add(mail);
-    }
+    private Settings settings;
 
     /**
      * Add a MockMail to the queue. Queue is sorted and trimmed right after it.
      * @param mail The MockMail object to add to the queue
      */
-    public static void add(MockMail mail)
+    @Subscribe
+    public void add(MockMail mail)
     {
         mailQueue.add(mail);
         Collections.sort(mailQueue);
@@ -33,7 +34,7 @@ public class MailQueue
     /**
      * @return Returns the complete mailQueue
      */
-    public static ArrayList<MockMail> getMailQueue()
+    public ArrayList<MockMail> getMailQueue()
     {
         return mailQueue;
     }
@@ -43,7 +44,7 @@ public class MailQueue
      * @param id The id of the mail mail that needs to be retrieved
      * @return Returns the MockMail when found or null otherwise
      */
-    public static MockMail getById(long id)
+    public MockMail getById(long id)
     {
         for(MockMail mockMail : mailQueue)
         {
@@ -57,9 +58,22 @@ public class MailQueue
     }
 
     /**
+     * Returns the MockMail that was last send.
+     *
+     * @return  Returns the MockMail when found or null otherwise
+     */
+    public MockMail getLastSendMail()
+    {
+        if (mailQueue.size() == 0)
+            return null;
+
+        return mailQueue.get(0);
+    }
+
+    /**
      * Removes all mail in the queue
      */
-    public static void emptyQueue()
+    public void emptyQueue()
     {
         mailQueue.clear();
         mailQueue.trimToSize();
@@ -68,15 +82,15 @@ public class MailQueue
     /**
      * Trims the mail queue so there aren't too many mails in it.
      */
-    private static void trimQueue()
+    private void trimQueue()
     {
-        if(mailQueue.size() > AppStarter.maxMailQueueSize)
+        if(mailQueue.size() > settings.getMaxMailQueueSize())
         {
             for (ListIterator<MockMail> iter = mailQueue.listIterator(mailQueue.size()); iter.hasPrevious();)
             {
                 iter.previous();
 
-                if(mailQueue.size() <= AppStarter.maxMailQueueSize)
+                if(mailQueue.size() <= settings.getMaxMailQueueSize())
                 {
                     break;
                 }
@@ -88,5 +102,10 @@ public class MailQueue
         }
 
         mailQueue.trimToSize();
+    }
+
+    @Autowired
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 }

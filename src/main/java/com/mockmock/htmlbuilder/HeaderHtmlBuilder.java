@@ -1,7 +1,9 @@
 package com.mockmock.htmlbuilder;
 
 import com.mockmock.AppStarter;
+import org.springframework.stereotype.Service;
 
+@Service
 public class HeaderHtmlBuilder implements HtmlBuilder
 {
     public String build()

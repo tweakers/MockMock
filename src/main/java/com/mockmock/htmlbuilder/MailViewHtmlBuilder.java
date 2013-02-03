@@ -2,9 +2,15 @@ package com.mockmock.htmlbuilder;
 
 import com.mockmock.mail.MockMail;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MailViewHtmlBuilder implements HtmlBuilder
 {
+    private MailViewHeadersHtmlBuilder headersBuilder;
+    private AddressesHtmlBuilder addressesHtmlBuilder;
+
     private MockMail mockMail;
 
     public void setMockMail(MockMail mockMail)
@@ -14,10 +20,8 @@ public class MailViewHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-        MailViewHeadersHtmlBuilder headersBuilder = new MailViewHeadersHtmlBuilder();
         headersBuilder.setMockMail(mockMail);
 
-        AddressesHtmlBuilder addressesHtmlBuilder = new AddressesHtmlBuilder();
         addressesHtmlBuilder.setMockMail(mockMail);
 
         String subjectOutput;
@@ -84,5 +88,15 @@ public class MailViewHtmlBuilder implements HtmlBuilder
                 "</div>\n";
 
         return output;
+    }
+
+    @Autowired
+    public void setMailViewHeadersHtmlBuilder(MailViewHeadersHtmlBuilder mailViewHeadersHtmlBuilder) {
+        this.headersBuilder = mailViewHeadersHtmlBuilder;
+    }
+
+    @Autowired
+    public void setAddressesHtmlBuilder(AddressesHtmlBuilder addressesHtmlBuilder) {
+        this.addressesHtmlBuilder = addressesHtmlBuilder;
     }
 }
