@@ -1,4 +1,4 @@
-![Travis CI](https://api.travis-ci.org/koku/MockMock.png?branch=master)
+![Travis CI](https://api.travis-ci.org/tweakers-dev/MockMock.png?branch=master)
 
 MockMock :: Mock SMTP Server
 ============================
