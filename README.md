@@ -8,13 +8,13 @@ MockMock is a cross-platform SMTP server built on Java. It allows you to test if
 Mail overview page
 ------------------
 
-![Mail overview page](https://raw.github.com/koku/MockMock/master/extra/mockmock1.png "The mail overview page shows you all received mails")
+![Mail overview page](https://raw.github.com/tweakers-dev/MockMock/master/extra/mockmock1.png "The mail overview page shows you all received mails")
 
 
 Mail detail page
 ----------------
 
-![Mail detail page](https://raw.github.com/koku/MockMock/master/extra/mockmock2.png "The mail detail page shows you all info about a mail, like headers, content, html content, etc")
+![Mail detail page](https://raw.github.com/tweakers-dev/MockMock/master/extra/mockmock2.png "The mail detail page shows you all info about a mail, like headers, content, html content, etc")
 
 
 Requirements
