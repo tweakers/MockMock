@@ -28,7 +28,7 @@ public class HeaderHtmlBuilder implements HtmlBuilder
                 "          <div class=\"nav-collapse collapse\">\n" +
                 "            <ul class=\"nav\">\n" +
                 "              <li class=\"active\"><a href=\"/\">Home</a></li>\n" +
-                "              <li><a href=\"https://github.com/koku/MockMock\">MockMock on Github</a></li>\n" +
+                "              <li><a href=\"https://github.com/tweakers-dev/MockMock\">MockMock on Github</a></li>\n" +
                 "            </ul>\n" +
                 "          </div>\n" +
                 "      </div>\n" +

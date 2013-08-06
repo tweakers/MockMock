@@ -84,7 +84,7 @@ public class MailQueue
 	 * @param id long
 	 * @return boolean
 	 */
-	public static boolean deleteById(long id)
+	public boolean deleteById(long id)
 	{
 		for(MockMail mockMail : mailQueue)
 		{

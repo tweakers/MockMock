@@ -1,6 +1,5 @@
 package com.mockmock.mail;
 
-import com.mockmock.AppStarter;
 import com.mockmock.Settings;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,11 +23,13 @@ public class MailQueueTest
 	public void testDeleteMailFromQueue()
 	{
 		MockMail mail = new MockMail();
+		mail.setId(1337);
 		MailQueue mailQueue = new MailQueue();
 		mailQueue.setSettings(new Settings());
 		mailQueue.add(mail);
 		Assert.assertFalse(mailQueue.getMailQueue().isEmpty());
 
+		mailQueue.deleteById(mail.getId());
 		Assert.assertTrue(mailQueue.getMailQueue().isEmpty());
 	}
 
