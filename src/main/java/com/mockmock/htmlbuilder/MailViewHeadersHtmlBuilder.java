@@ -1,11 +1,13 @@
 package com.mockmock.htmlbuilder;
 
 import com.mockmock.mail.MockMail;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Enumeration;
 
+@Service
 public class MailViewHeadersHtmlBuilder implements HtmlBuilder
 {
     private MockMail mockMail;

@@ -1,5 +1,8 @@
 package com.mockmock.htmlbuilder;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class FooterHtmlBuilder implements HtmlBuilder
 {
     public String build()
