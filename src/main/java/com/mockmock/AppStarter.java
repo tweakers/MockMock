@@ -3,10 +3,17 @@ package com.mockmock;
 import com.google.common.eventbus.EventBus;
 import com.mockmock.mail.MailQueue;
 import org.apache.commons.cli.*;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
+import java.util.Properties;
 
 public class AppStarter
 {
-    public static final float VERSION_NUMBER = 1.1f;
+    public static final float VERSION_NUMBER = 1.2f;
 
     /**
      * The default port where MockMock will run on
@@ -33,6 +40,8 @@ public class AppStarter
 
         Server smtpServer = new SmtpServer(smtpPort, eventBus);
         smtpServer.start();
+
+//		fillQueueWithTestMails(25);
 
         Server httpServer = new HttpServer(httpPort);
         httpServer.start();
@@ -120,4 +129,36 @@ public class AppStarter
             }
         }
     }
+
+	/**
+	 * Can be called to fill the queue with some test mails to make life easier
+	 * @param amount int
+	 */
+	protected static void fillQueueWithTestMails(int amount)
+	{
+		for (int i = 0; i < amount; i++)
+		{
+			Properties properties = new Properties();
+			properties.put("mail.smtp.host", "localhost");
+			properties.put("mail.smtp.port", smtpPort);
+			properties.put("mail.debug", "true");
+
+			Session session = Session.getInstance(properties);
+
+			try
+			{
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress("from@example.com"));
+				InternetAddress[] address = { new InternetAddress("to@example.com") };
+				message.setRecipients(MimeMessage.RecipientType.TO, address);
+				message.setSubject("This is just an automatic test mail (" + i + ")");
+				message.setSentDate(new Date());
+				message.setText("With some test content");
+
+				Transport.send(message);
+			}
+			catch (MessagingException e) {}
+		}
+
+	}
 }

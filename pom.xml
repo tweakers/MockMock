@@ -6,13 +6,13 @@
 
     <groupId>com.mockmock</groupId>
     <artifactId>MockMock</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
 
     <name>MockMock</name>
     <description>Mock SMTP Server</description>
     <inceptionYear>2012</inceptionYear>
-    <url>https://github.com/koku/MockMock</url>
+    <url>https://github.com/tweakers-dev/MockMock</url>
 
     <prerequisites>
         <maven>3.0</maven>

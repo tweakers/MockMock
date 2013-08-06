@@ -65,6 +65,25 @@ public class MailQueue
         mailQueue.trimToSize();
     }
 
+	/**
+	 * Removes the mail with the given id from the queue
+	 * @param id long
+	 * @return boolean
+	 */
+	public static boolean deleteById(long id)
+	{
+		for(MockMail mockMail : mailQueue)
+		{
+			if(mockMail.getId() == id)
+			{
+				mailQueue.remove(mailQueue.indexOf(mockMail));
+				return true;
+			}
+		}
+
+		return false;
+	}
+
     /**
      * Trims the mail queue so there aren't too many mails in it.
      */

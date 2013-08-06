@@ -6,16 +6,27 @@ import org.junit.Test;
 
 public class MailQueueTest
 {
-    @Test
-    public void testEmptyQueue()
-    {
-        MockMail mail = new MockMail();
-        MailQueue.add(mail);
-        Assert.assertFalse(MailQueue.getMailQueue().isEmpty());
+	@Test
+	public void testEmptyQueue()
+	{
+		MockMail mail = new MockMail();
+		MailQueue.add(mail);
+		Assert.assertFalse(MailQueue.getMailQueue().isEmpty());
 
-        MailQueue.emptyQueue();
-        Assert.assertTrue(MailQueue.getMailQueue().isEmpty());
-    }
+		MailQueue.emptyQueue();
+		Assert.assertTrue(MailQueue.getMailQueue().isEmpty());
+	}
+
+	@Test
+	public void testDeleteMailFromQueue()
+	{
+		MockMail mail = new MockMail();
+		MailQueue.add(mail);
+		Assert.assertFalse(MailQueue.getMailQueue().isEmpty());
+
+		MailQueue.deleteById(mail.getId());
+		Assert.assertTrue(MailQueue.getMailQueue().isEmpty());
+	}
 
     @Test
     public void testAdd()

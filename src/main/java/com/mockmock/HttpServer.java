@@ -2,6 +2,7 @@ package com.mockmock;
 
 import com.mockmock.http.DeleteHandler;
 import com.mockmock.http.IndexHandler;
+import com.mockmock.http.MailDeleteHandler;
 import com.mockmock.http.MailDetailHandler;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -44,6 +45,7 @@ public class HttpServer implements com.mockmock.Server
         Handler[] handlers = {
                 new IndexHandler(),
                 new MailDetailHandler(),
+                new MailDeleteHandler(),
                 new DeleteHandler(),
             resourceHandler
         };

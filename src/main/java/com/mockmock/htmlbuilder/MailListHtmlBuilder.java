@@ -33,6 +33,7 @@ public class MailListHtmlBuilder implements HtmlBuilder
             output += "      <th>From</th>\n";
             output += "      <th>To</th>\n";
             output += "      <th>Subject</th>\n";
+            output += "      <th>Action</th>\n";
             output += "    </thead>\n";
             output += "    <tbody>\n";
             for (MockMail mail : mailQueue)
@@ -75,6 +76,7 @@ public class MailListHtmlBuilder implements HtmlBuilder
             "  <td>" + fromOutput + "</td>\n" +
             "  <td>" + toOutput + "</td>\n" +
             "  <td><a title=\"" + StringEscapeUtils.escapeHtml(mail.getSubject()) + "\" href=\"/view/" + mail.getId() + "\">" + subjectOutput + "</a></td>\n" +
+            "  <td><a title=\"Delete this mail\" href=\"/delete/" + mail.getId() + "\"><em>Delete</em></a></td>\n" +
             "</tr>";
     }
 }

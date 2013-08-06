@@ -16,6 +16,11 @@ public class StringFromHtmlBuilder implements HtmlBuilder
         String output = "";
         MimeMessage mimeMessage = mockMail.getMimeMessage();
 
+		if(mimeMessage == null)
+		{
+			return output;
+		}
+
         try
         {
             Address[] addresses = mimeMessage.getFrom();

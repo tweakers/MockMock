@@ -30,6 +30,8 @@ public class MailViewHtmlBuilder implements HtmlBuilder
             subjectOutput = StringEscapeUtils.escapeHtml(mockMail.getSubject());
         }
 
+		subjectOutput += " <small class=\"deleteLink\"><a href=\"/delete/" + mockMail.getId() + "\">Delete</a></small>";
+
         String output = "<div class=\"container\">\n";
 
         output +=
