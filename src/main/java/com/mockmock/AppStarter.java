@@ -35,12 +35,15 @@ public class AppStarter
 
 //		fillQueueWithTestMails(settings.getSmtpPort(), 20);
 
-        IrcServer ircServer = (IrcServer) factory.getBean("ircServer");
-        ircServer.setServer(settings.getIrcServer());
-        ircServer.setPort(settings.getIrcPort());
-        ircServer.setNickname(settings.getNickname());
-        ircServer.setChannels(settings.getChannels());
-        ircServer.start();
+		if (settings.isConnectToIrc())
+		{
+			IrcServer ircServer = (IrcServer) factory.getBean("ircServer");
+			ircServer.setServer(settings.getIrcServer());
+			ircServer.setPort(settings.getIrcPort());
+			ircServer.setNickname(settings.getNickname());
+			ircServer.setChannels(settings.getChannels());
+			ircServer.start();
+		}
 
         Server httpServer = (Server) factory.getBean("httpServer");
         httpServer.setPort(settings.getHttpPort());

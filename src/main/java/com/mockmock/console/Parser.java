@@ -23,6 +23,7 @@ public class Parser
         options.addOption("p", true, "The mail port number to use. Default is 25000.");
         options.addOption("h", true, "The http port number to use. Default is 8282.");
         options.addOption("m", true, "The maximum size of the mail qeueue. Default is 1000.");
+        options.addOption("e", false, "Provide this option to enable connecting to the irc server. When using another irc setting, this is automatically enabled.");
         options.addOption("i", true, "The irc server to use in the <server>:<port> format. Default is irc.tweakers.net:6667.");
         options.addOption("n", true, "The irc nickname to use. Default is 'mockmock'.");
         options.addOption("c", true, "Comma separated list of channels. Default is #postman");
@@ -45,6 +46,7 @@ public class Parser
             parseSmtpPortOption(cmd, settings);
             parseHttpPortOption(cmd, settings);
             parseMailQueueSizeOption(cmd, settings);
+			parseConnectToIrcOption(cmd, settings);
             parseIrcServerOption(cmd, settings);
             parseIrcNicknameOption(cmd, settings);
             parseIrcChannelsOption(cmd, settings);
@@ -103,6 +105,11 @@ public class Parser
         }
     }
 
+	protected void parseConnectToIrcOption(CommandLine cmd, Settings settings)
+	{
+		settings.setConnectToIrc(cmd.hasOption("e"));
+	}
+
     protected void parseIrcServerOption(CommandLine cmd, Settings settings)
     {
         if(cmd.hasOption("i"))
@@ -123,6 +130,9 @@ public class Parser
                     settings.setIrcServer(server);
                     settings.setIrcPort(port);
                 }
+
+				// when this option is correctly set, connect to irc
+				settings.setConnectToIrc(true);
             }
             catch (NumberFormatException e)
             {
@@ -138,6 +148,9 @@ public class Parser
             try
             {
                 settings.setNickname(cmd.getOptionValue("n"));
+
+				// when this option is correctly set, connect to irc
+				settings.setConnectToIrc(true);
             }
             catch (NumberFormatException e)
             {
@@ -155,6 +168,9 @@ public class Parser
                 String input = cmd.getOptionValue("c");
                 String[] channels = input.split(",");
                 settings.setChannels(new HashSet<>(Arrays.asList(channels)));
+
+				// when this option is correctly set, connect to irc
+				settings.setConnectToIrc(true);
             }
             catch (NumberFormatException e)
             {

@@ -24,6 +24,11 @@ public class Settings
      */
     private int maxMailQueueSize = 1000;
 
+	/**
+	 * Whether or not to connect to the IRC server
+	 */
+	private boolean connectToIrc = false;
+
     /**
      * The irc server to connect to
      */
@@ -104,4 +109,12 @@ public class Settings
     public void setChannels(Set<String> channels) {
         this.channels = channels;
     }
+
+	public boolean isConnectToIrc() {
+		return connectToIrc;
+	}
+
+	public void setConnectToIrc(boolean connectToIrc) {
+		this.connectToIrc = connectToIrc;
+	}
 }
