@@ -144,9 +144,19 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         @Override
         public void done()
         {
-			// this email address is in the filter list, so don't add it
-			if(settings.getFilterEmailAddresses().contains(mockMail.getFrom()))
+			// check if this email's "from" address matches one in the filtered list
+			if(settings.getFilterFromEmailAddresses().contains(mockMail.getFrom()))
+			{
+				System.out.println("Skipping email, because From address '" + mockMail.getFrom() + "' matches filter");
 				return;
+			}
+
+			// check if this email's "to" address matches one in the filtered list
+			if(settings.getFilterToEmailAddresses().contains(mockMail.getTo()))
+			{
+				System.out.println("Skipping email, because To address '" + mockMail.getTo() + "' matches filter");
+				return;
+			}
 
             // set the received date
             mockMail.setReceivedTime(DateTime.now().getMillis());

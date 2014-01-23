@@ -50,9 +50,14 @@ public class Settings
     private Set<String> channels = new HashSet<>();
 
 	/**
-	 * A set of email addresses to filter
+	 * A set of "From" email addresses to filter
 	 */
-    private Set<String> filterEmailAddresses = new HashSet<>();
+    private Set<String> filterFromEmailAddresses = new HashSet<>();
+
+	/**
+	 * A set of "To" email addresses to filter
+	 */
+    private Set<String> filterToEmailAddresses = new HashSet<>();
 
 
     public Settings()
@@ -124,11 +129,19 @@ public class Settings
 		this.connectToIrc = connectToIrc;
 	}
 
-	public Set<String> getFilterEmailAddresses() {
-		return filterEmailAddresses;
+	public Set<String> getFilterFromEmailAddresses() {
+		return filterFromEmailAddresses;
 	}
 
-	public void setFilterEmailAddresses(Set<String> filterEmailAddresses) {
-		this.filterEmailAddresses = filterEmailAddresses;
+	public void setFilterFromEmailAddresses(Set<String> filterFromEmailAddresses) {
+		this.filterFromEmailAddresses = filterFromEmailAddresses;
+	}
+
+	public Set<String> getFilterToEmailAddresses() {
+		return filterToEmailAddresses;
+	}
+
+	public void setFilterToEmailAddresses(Set<String> filterToEmailAddresses) {
+		this.filterToEmailAddresses = filterToEmailAddresses;
 	}
 }

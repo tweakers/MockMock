@@ -26,7 +26,8 @@ public class Parser
         options.addOption("i", true, "The irc server to use in the <server>:<port> format. Default is irc.tweakers.net:6667.");
         options.addOption("n", true, "The irc nickname to use. Default is 'mockmock'.");
         options.addOption("c", true, "Comma separated list of channels. Default is #postman");
-        options.addOption("f", true, "Filters out from email addresses (comma separated)");
+        options.addOption("ff", true, "Filters out from email addresses (comma separated)");
+        options.addOption("ft", true, "Filters out to email addresses (comma separated)");
         options.addOption("?", false, "Shows this help information");
 
         // parse the given arguments
@@ -50,7 +51,8 @@ public class Parser
             parseIrcServerOption(cmd, settings);
             parseIrcNicknameOption(cmd, settings);
             parseIrcChannelsOption(cmd, settings);
-			parseFilterEmailAddressesOption(cmd, settings);
+			parseFilterFromEmailAddressesOption(cmd, settings);
+			parseFilterToEmailAddressesOption(cmd, settings);
         }
         catch (ParseException e)
         {
@@ -179,13 +181,23 @@ public class Parser
         }
     }
 
-	protected void parseFilterEmailAddressesOption(CommandLine cmd, Settings settings)
+	protected void parseFilterFromEmailAddressesOption(CommandLine cmd, Settings settings)
 	{
-		if(cmd.hasOption("f"))
+		if(cmd.hasOption("ff"))
 		{
-			String input = cmd.getOptionValue("f");
+			String input = cmd.getOptionValue("ff");
 			String[] emailAddresses = input.split(",");
-			settings.setFilterEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
+			settings.setFilterFromEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
+		}
+	}
+
+	protected void parseFilterToEmailAddressesOption(CommandLine cmd, Settings settings)
+	{
+		if(cmd.hasOption("ft"))
+		{
+			String input = cmd.getOptionValue("ft");
+			String[] emailAddresses = input.split(",");
+			settings.setFilterToEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
 		}
 	}
 }
