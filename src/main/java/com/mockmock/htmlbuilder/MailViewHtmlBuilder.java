@@ -70,6 +70,13 @@ public class MailViewHtmlBuilder implements HtmlBuilder
                     "       <h3>HTML body</h3>\n" +
                     "       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()).replaceAll("\n", "<br />") + "</p>\n" +
                     "    </div>\n";
+
+			// also show a parsed version via an iframe
+			output +=
+					"    <div class=\"span10\">\n" +
+                    "        <iframe src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\">\n" +
+                    "        </iframe>\n" +
+					"    </div>";
         }
 
 		// just output the raw mail so we're sure everything is on the screen

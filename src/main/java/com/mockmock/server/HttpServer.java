@@ -1,10 +1,7 @@
 package com.mockmock.server;
 
 import com.mockmock.AppStarter;
-import com.mockmock.http.DeleteHandler;
-import com.mockmock.http.IndexHandler;
-import com.mockmock.http.MailDeleteHandler;
-import com.mockmock.http.MailDetailHandler;
+import com.mockmock.http.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -21,6 +18,7 @@ public class HttpServer implements com.mockmock.server.Server
 
     private IndexHandler indexHandler;
     private MailDetailHandler mailDetailHandler;
+    private MailDetailHtmlHandler mailDetailHtmlHandler;
     private MailDeleteHandler mailDeleteHandler;
     private DeleteHandler deleteHandler;
 
@@ -47,11 +45,12 @@ public class HttpServer implements com.mockmock.server.Server
         resourceHandler.setResourceBase(path);
 
         Handler[] handlers = {
-                this.indexHandler,
-                this.mailDetailHandler,
-                this.mailDeleteHandler,
-                this.deleteHandler,
-            resourceHandler
+			this.indexHandler,
+			this.mailDetailHandler,
+			this.mailDetailHtmlHandler,
+			this.mailDeleteHandler,
+			this.deleteHandler,
+			resourceHandler
         };
         HandlerList handlerList = new HandlerList();
         handlerList.setHandlers(handlers);
@@ -77,6 +76,11 @@ public class HttpServer implements com.mockmock.server.Server
 	@Autowired
 	public void setMailDetailHandler(MailDetailHandler mailDetailHandler) {
 		this.mailDetailHandler = mailDetailHandler;
+	}
+
+	@Autowired
+	public void setMailDetailHtmlHandler(MailDetailHtmlHandler mailDetailHtmlHandler) {
+		this.mailDetailHtmlHandler = mailDetailHtmlHandler;
 	}
 
 	@Autowired
