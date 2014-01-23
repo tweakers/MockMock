@@ -49,6 +49,12 @@ public class Settings
      */
     private Set<String> channels = new HashSet<>();
 
+	/**
+	 * A set of email addresses to filter
+	 */
+    private Set<String> filterEmailAddresses = new HashSet<>();
+
+
     public Settings()
     {
         this.channels.add("#postman");
@@ -116,5 +122,13 @@ public class Settings
 
 	public void setConnectToIrc(boolean connectToIrc) {
 		this.connectToIrc = connectToIrc;
+	}
+
+	public Set<String> getFilterEmailAddresses() {
+		return filterEmailAddresses;
+	}
+
+	public void setFilterEmailAddresses(Set<String> filterEmailAddresses) {
+		this.filterEmailAddresses = filterEmailAddresses;
 	}
 }

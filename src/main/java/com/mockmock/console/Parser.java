@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class Parser
@@ -27,6 +26,7 @@ public class Parser
         options.addOption("i", true, "The irc server to use in the <server>:<port> format. Default is irc.tweakers.net:6667.");
         options.addOption("n", true, "The irc nickname to use. Default is 'mockmock'.");
         options.addOption("c", true, "Comma separated list of channels. Default is #postman");
+        options.addOption("f", true, "Filters out from email addresses (comma separated)");
         options.addOption("?", false, "Shows this help information");
 
         // parse the given arguments
@@ -50,7 +50,7 @@ public class Parser
             parseIrcServerOption(cmd, settings);
             parseIrcNicknameOption(cmd, settings);
             parseIrcChannelsOption(cmd, settings);
-
+			parseFilterEmailAddressesOption(cmd, settings);
         }
         catch (ParseException e)
         {
@@ -178,4 +178,14 @@ public class Parser
             }
         }
     }
+
+	protected void parseFilterEmailAddressesOption(CommandLine cmd, Settings settings)
+	{
+		if(cmd.hasOption("f"))
+		{
+			String input = cmd.getOptionValue("f");
+			String[] emailAddresses = input.split(",");
+			settings.setFilterEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
+		}
+	}
 }

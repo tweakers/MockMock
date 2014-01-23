@@ -1,6 +1,7 @@
 package com.mockmock.mail;
 
 import com.google.common.eventbus.EventBus;
+import com.mockmock.Settings;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.Properties;
 public class MockMockMessageHandlerFactory implements MessageHandlerFactory
 {
     private EventBus eventBus;
+	private Settings settings;
 
     @Autowired
     public MockMockMessageHandlerFactory(EventBus eventBus)
@@ -28,7 +30,13 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         this.eventBus = eventBus;
     }
 
-    @Override
+	@Autowired
+	public void setSettings(Settings settings)
+	{
+		this.settings = settings;
+	}
+
+	@Override
     public MessageHandler create(MessageContext messageContext)
     {
         return new MockMockHandler(messageContext);
@@ -136,6 +144,10 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         @Override
         public void done()
         {
+			// this email address is in the filter list, so don't add it
+			if(settings.getFilterEmailAddresses().contains(mockMail.getFrom()))
+				return;
+
             // set the received date
             mockMail.setReceivedTime(DateTime.now().getMillis());
 
