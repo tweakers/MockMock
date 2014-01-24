@@ -1,6 +1,7 @@
 package com.mockmock.server;
 
 import com.mockmock.AppStarter;
+import com.mockmock.Settings;
 import com.mockmock.http.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -16,6 +17,7 @@ public class HttpServer implements com.mockmock.server.Server
 {
     private int port;
 
+    private Settings settings;
     private IndexHandler indexHandler;
     private MailDetailHandler mailDetailHandler;
     private MailDetailHtmlHandler mailDetailHtmlHandler;
@@ -31,15 +33,25 @@ public class HttpServer implements com.mockmock.server.Server
     {
         Server http = new Server(port);
 
-        // get the path to the "static" folder. If it doesn't exists, check if it's in the folder of the file being
-        // executed
+        // get the path to the "static" folder. If it doesn't exists, check if it's in the folder of the file being executed.
         String path = "./static";
-        if(!new File(path).exists())
+        if(settings.getStaticFolderPath() != null)
         {
+            path = settings.getStaticFolderPath();
+        }
+
+        if( ! new File(path).exists())
+        {
+            System.out.println("Path to static folder does not exist: " + path);
+
             // get the directory we're in
             path = AppStarter.class.getProtectionDomain().getCodeSource().getLocation().getPath();
             path = new File(path).getParent() + "/static";
+
+            System.out.println("Using auto guessed folder: " + path);
         }
+
+        System.out.println("Path to resources folder: " + path);
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(path);
@@ -91,5 +103,10 @@ public class HttpServer implements com.mockmock.server.Server
     @Autowired
     public void setDeleteHandler(DeleteHandler deleteHandler) {
         this.deleteHandler = deleteHandler;
+    }
+
+    @Autowired
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 }

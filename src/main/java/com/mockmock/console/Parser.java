@@ -25,10 +25,11 @@ public class Parser
         options.addOption("e", false, "Provide this option to enable connecting to the irc server. When using another irc setting, this is automatically enabled.");
         options.addOption("i", true, "The irc server to use in the <server>:<port> format. Default is irc.tweakers.net:6667.");
         options.addOption("n", true, "The irc nickname to use. Default is 'mockmock'.");
-        options.addOption("c", true, "Comma separated list of channels. Default is #postman");
-        options.addOption("ff", true, "Filters out from email addresses (comma separated)");
-        options.addOption("ft", true, "Filters out to email addresses (comma separated)");
-        options.addOption("?", false, "Shows this help information");
+        options.addOption("c", true, "Comma separated list of channels. Default is #postman.");
+        options.addOption("ff", true, "Filters out from email addresses (comma separated).");
+        options.addOption("ft", true, "Filters out to email addresses (comma separated).");
+        options.addOption("s", true, "Full path to the folder containing the static files like images and css.");
+        options.addOption("?", false, "Shows this help information.");
 
         // parse the given arguments
         CommandLineParser parser = new PosixParser();
@@ -53,6 +54,7 @@ public class Parser
             parseIrcChannelsOption(cmd, settings);
 			parseFilterFromEmailAddressesOption(cmd, settings);
 			parseFilterToEmailAddressesOption(cmd, settings);
+            parseStaticFolderOption(cmd, settings);
         }
         catch (ParseException e)
         {
@@ -200,4 +202,12 @@ public class Parser
 			settings.setFilterToEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
 		}
 	}
+
+    protected void parseStaticFolderOption(CommandLine cmd, Settings settings)
+    {
+        if(cmd.hasOption("s"))
+        {
+            settings.setStaticFolderPath(cmd.getOptionValue("s"));
+        }
+    }
 }

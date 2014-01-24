@@ -59,6 +59,11 @@ public class Settings
 	 */
     private Set<String> filterToEmailAddresses = new HashSet<>();
 
+    /**
+     * Path to the static folder containing the images, css and js
+     */
+    private String staticFolderPath;
+
 
     public Settings()
     {
@@ -144,4 +149,12 @@ public class Settings
 	public void setFilterToEmailAddresses(Set<String> filterToEmailAddresses) {
 		this.filterToEmailAddresses = filterToEmailAddresses;
 	}
+
+    public String getStaticFolderPath() {
+        return staticFolderPath;
+    }
+
+    public void setStaticFolderPath(String staticFolderPath) {
+        this.staticFolderPath = staticFolderPath;
+    }
 }
