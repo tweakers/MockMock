@@ -41,7 +41,7 @@ public class Parser
             if(cmd.hasOption("?"))
             {
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp( "java -jar MockMock.jar -p 25000 -h 8282", options );
+                formatter.printHelp( "java -jar MockMock.jar -p 25 -h 8282", options );
                 System.exit(0);
             }
 

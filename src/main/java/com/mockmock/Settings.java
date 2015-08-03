@@ -12,7 +12,7 @@ public class Settings
     /**
      * The default port where MockMock will run on
      */
-    private int smtpPort = 25000;
+    private int smtpPort = 25;
 
     /**
      * The default port for the http server
