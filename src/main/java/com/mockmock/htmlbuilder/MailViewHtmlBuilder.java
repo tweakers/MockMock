@@ -59,7 +59,7 @@ public class MailViewHtmlBuilder implements HtmlBuilder
             output +=
                     "    <div class=\"span10\">\n" +
                     "       <h3>Plain text body</h3>\n" +
-                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBody()).replaceAll("\n", "<br />") + "</p>\n" +
+                    "       <p class=\"well\" name=\"bodyPlainText\">" + StringEscapeUtils.escapeHtml(mockMail.getBody()) + "</p>\n" +
                     "    </div>\n";
         }
 
@@ -67,16 +67,16 @@ public class MailViewHtmlBuilder implements HtmlBuilder
         {
             output +=
                     "    <div class=\"span10\">\n" +
-                    "       <h3>HTML body</h3>\n" +
-                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()).replaceAll("\n", "<br />") + "</p>\n" +
+                    "       <h3>HTML body unformatted</h3>\n" +
+                    "       <p class=\"well\" name=\"bodyHTML_Unformatted\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()) + "</p>\n" +
                     "    </div>\n";
 
-			// also show a parsed version via an iframe
-			output +=
-					"    <div class=\"span10\">\n" +
-                    "        <iframe src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\">\n" +
+            // also show a parsed version via an iframe
+            output +=
+                    "    <div class=\"span10\">\n" +
+                    "        <iframe src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\" style=\"\" name=\"bodyHTML_iFrame\">\n" +
                     "        </iframe>\n" +
-					"    </div>";
+                    "    </div>";
         }
 
 		// just output the raw mail so we're sure everything is on the screen
@@ -86,7 +86,7 @@ public class MailViewHtmlBuilder implements HtmlBuilder
 			output +=
 					"    <div class=\"span10\">\n" +
 							"       <h3>Complete raw mail output</h3>\n" +
-							"       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getRawMail()).replaceAll("\n", "<br />") + "</p>\n" +
+							"       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getRawMail()) + "</p>\n" +
 							"    </div>\n";
 		}
 
