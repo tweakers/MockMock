@@ -129,6 +129,19 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
                     InputStream mailContent = (InputStream) messageContent;
                     mockMail.setBody(convertStreamToString(mailContent));
                 }
+                else if(messageContent instanceof String)
+                {
+                    String contentType = message.getContentType();
+
+                    if(contentType.matches("text/plain.*"))
+                    {
+                        mockMail.setBody(messageContent.toString());
+                    }
+                    else if(contentType.matches("text/html.*"))
+                    {
+                        mockMail.setBodyHtml(messageContent.toString());
+                    }
+                }
             }
             catch (MessagingException e)
             {
