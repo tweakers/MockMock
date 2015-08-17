@@ -29,6 +29,7 @@ public class Parser
         options.addOption("ff", true, "Filters out from email addresses (comma separated).");
         options.addOption("ft", true, "Filters out to email addresses (comma separated).");
         options.addOption("s", true, "Full path to the folder containing the static files like images and css.");
+        options.addOption("ec", false, "Turns on emails printing to console. Default off");
         options.addOption("?", false, "Shows this help information.");
 
         // parse the given arguments
@@ -45,6 +46,7 @@ public class Parser
                 System.exit(0);
             }
 
+            partseShowEmailInConsoleOption(cmd, settings);
             parseSmtpPortOption(cmd, settings);
             parseHttpPortOption(cmd, settings);
             parseMailQueueSizeOption(cmd, settings);
@@ -62,6 +64,22 @@ public class Parser
         }
 
         return settings;
+    }
+
+    protected void partseShowEmailInConsoleOption(CommandLine cmd, Settings settings)
+    {
+        if(cmd.hasOption("ec"))
+        {
+            try
+            {
+                // settings.setShowEmailInConsole(Boolean.valueOf(cmd.getOptionValue("ec")));
+                settings.setShowEmailInConsole(true);
+            }
+            catch(IllegalArgumentException e)
+            {
+                System.err.println("Invalid value given, using default " + settings.getShowEmailInConsole());
+            }
+        }
     }
 
     protected void parseSmtpPortOption(CommandLine cmd, Settings settings)
