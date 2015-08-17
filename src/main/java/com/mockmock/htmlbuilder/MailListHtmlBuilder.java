@@ -24,12 +24,12 @@ public class MailListHtmlBuilder implements HtmlBuilder
 
         if(mailQueue == null || mailQueue.size() == 0)
         {
-            output += "  <h2>Hmm, no mails yet. That makes me sad :'(</h2>\n";
+            output += "  <h2>No emails in queue</h2>\n";
         }
         else
         {
-            String mailText = mailQueue.size() == 1 ? "mail" : "mails";
-            output += "  <h1>I've got " + mailQueue.size() + " " + mailText + " for you. Nice! <small class=\"deleteLink\"><a class=\"delete\" href=\"/mail/delete/all\">Delete all</a></small></h1>\n";
+            String mailText = mailQueue.size() == 1 ? "email" : "emails";
+            output += "  <h1>You have "  + mailQueue.size() + " " + mailText + "! <small class=\"deleteLink\"><a class=\"delete\" href=\"/mail/delete/all\">Delete all</a></small></h1>\n";
             output += "  <table class=\"table table-striped\">\n";
             output += "    <thead>\n";
             output += "      <th>From</th>\n";
