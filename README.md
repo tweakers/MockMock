@@ -26,13 +26,14 @@ MockMock is built using Java and to function you need a Java 7 runtime environme
 Installation / setup
 ====================
 
-The easiest way to install and run MockMock is by downloading the complete package [here](https://github.com/downloads/tweakers-dev/MockMock/MockMock.zip). Extract it to any place you like and start the server by running:
+The easiest way to install and run MockMock is by downloading the jar file [here](https://github.com/tweakers-dev/MockMock/blob/master/release/MockMock.jar) (right click -> "save target as"). Extract it to any place you like and start the server by running:
 `java -jar MockMock.jar`
 
-This will run MockMock on the default ports 25000 (for SMTP) and 8282 (the web interface). After it started you can use your internet browser to navigate to [http://localhost:8282] (replace host name and web port if necessary). This will now show you the emails it received (which should be none at the moment). You can now send emails using the built in SMTP server running on port 25000 by default. The emails should be visible via the web interface. To run MockMock on another port, you can start it with the following parameters:
-`java -jar MockMock.jar -p 25 -h 80`
+This will run MockMock on the default ports 25 (for SMTP) and 8282 (the web interface). Please note you might need root permissions on some systems to let it listen on port 25.
+After it started you can use your internet browser to navigate to [http://localhost:8282] (replace host name and web port if necessary). This will now show you the emails it received (which should be none at the moment). You can now send emails using the built in SMTP server running on port 25 by default. The emails should be visible via the web interface. To run MockMock on another port, you can start it with the following parameters:
+`java -jar MockMock.jar -p 25000 -h 8080`
 
-This will run MockMock on SMTP port 25 and http port 80. Please note you might need root permissions on some systems.
+This will run MockMock on SMTP port 25000 and http port 8080.
 
 
 Running as a Daemon
