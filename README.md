@@ -26,7 +26,7 @@ MockMock is built using Java and to function you need a Java 7 runtime environme
 Installation / setup
 ====================
 
-The easiest way to install and run MockMock is by downloading the jar file [here](https://github.com/tweakers-dev/MockMock/blob/master/release/MockMock.jar) (right click -> "save target as"). Extract it to any place you like and start the server by running:
+The easiest way to install and run MockMock is by downloading the jar file [here](https://github.com/tweakers-dev/MockMock/blob/master/release/MockMock.jar?raw=true) (right click -> "save target as"). Extract it to any place you like and start the server by running:
 `java -jar MockMock.jar`
 
 This will run MockMock on the default ports 25 (for SMTP) and 8282 (the web interface). Please note you might need root permissions on some systems to let it listen on port 25.
