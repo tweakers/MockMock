@@ -10,9 +10,14 @@ import java.util.Set;
 public class Settings
 {
     /**
+     * Whether to show console output when receiving email.
+     */
+    private boolean showEmailInConsole = false;
+
+    /**
      * The default port where MockMock will run on
      */
-    private int smtpPort = 25000;
+    private int smtpPort = 25;
 
     /**
      * The default port for the http server
@@ -68,6 +73,16 @@ public class Settings
     public Settings()
     {
         this.channels.add("#postman");
+    }
+
+    public boolean getShowEmailInConsole()
+    {
+        return showEmailInConsole;
+    }
+
+    public void setShowEmailInConsole(boolean showEmailInConsole)
+    {
+        this.showEmailInConsole = showEmailInConsole;
     }
 
     public int getSmtpPort() {

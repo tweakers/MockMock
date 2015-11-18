@@ -69,7 +69,15 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         public void from(String from) throws RejectException
         {
             this.mockMail.setFrom(from);
-            System.out.println("FROM:" + from);
+
+            if(settings.getShowEmailInConsole())
+            {
+                System.out.println("FROM:" + from);
+            }
+            else
+            {
+                System.out.println("Email from " + from + " received.");
+            }
         }
 
         /**
@@ -82,7 +90,11 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         public void recipient(String recipient) throws RejectException
         {
             this.mockMail.setTo(recipient);
-            System.out.println("RECIPIENT:" + recipient);
+
+            if(settings.getShowEmailInConsole())
+            {
+                System.out.println("RECIPIENT:" + recipient);
+            }
         }
 
         /**
@@ -129,16 +141,32 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
                     InputStream mailContent = (InputStream) messageContent;
                     mockMail.setBody(convertStreamToString(mailContent));
                 }
+                else if(messageContent instanceof String)
+                {
+                    String contentType = message.getContentType();
+
+                    if(contentType.matches("text/plain.*"))
+                    {
+                        mockMail.setBody(messageContent.toString());
+                    }
+                    else if(contentType.matches("text/html.*"))
+                    {
+                        mockMail.setBodyHtml(messageContent.toString());
+                    }
+                }
             }
             catch (MessagingException e)
             {
                 e.printStackTrace();
             }
 
-            System.out.println("MAIL DATA");
-            System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
-            System.out.println(mockMail.getRawMail());
-            System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+            if(settings.getShowEmailInConsole())
+            {
+                System.out.println("MAIL DATA");
+                System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+                System.out.println(mockMail.getRawMail());
+                System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+            }
         }
 
         @Override
@@ -161,7 +189,11 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
             // set the received date
             mockMail.setReceivedTime(DateTime.now().getMillis());
 
-            System.out.println("Finished");
+            if(settings.getShowEmailInConsole())
+            {
+                System.out.println("Finished");
+            }
+
             eventBus.post(mockMail);
         }
 

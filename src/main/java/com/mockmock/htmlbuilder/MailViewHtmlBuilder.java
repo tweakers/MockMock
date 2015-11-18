@@ -43,13 +43,13 @@ public class MailViewHtmlBuilder implements HtmlBuilder
                 "  <div class=\"row\">\n";
 
         output +=
-                "    <div class=\"span10\">\n" +
+                "    <div class=\"span10\" name=\"addresses\">\n" +
                 "       <h3>Addresses</h3>\n" +
                 "       " + addressesHtmlBuilder.build() +
                 "    </div>\n";
 
         output +=
-                "    <div class=\"span10\">\n" +
+                "    <div class=\"span10\" name=\"headers\">\n" +
                 "       <h3>Mail headers</h3>\n" +
                 "       " + headersBuilder.build() +
                 "    </div>\n";
@@ -57,26 +57,32 @@ public class MailViewHtmlBuilder implements HtmlBuilder
         if(mockMail.getBody() != null)
         {
             output +=
-                    "    <div class=\"span10\">\n" +
+                    "    <div class=\"span10\" name=\"bodyPlainText\">\n" +
                     "       <h3>Plain text body</h3>\n" +
-                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBody()).replaceAll("\n", "<br />") + "</p>\n" +
+                    "       <div class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBody()) + "</div>\n" +
                     "    </div>\n";
         }
 
         if(mockMail.getBodyHtml() != null)
         {
             output +=
-                    "    <div class=\"span10\">\n" +
-                    "       <h3>HTML body</h3>\n" +
-                    "       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()).replaceAll("\n", "<br />") + "</p>\n" +
+                    "    <div class=\"span10\" name=\"bodyHTML_Unformatted\">\n" +
+                    "       <h3>HTML body unformatted</h3>\n" +
+                    "       <div class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()) + "</div>\n" +
                     "    </div>\n";
 
-			// also show a parsed version via an iframe
-			output +=
-					"    <div class=\"span10\">\n" +
-                    "        <iframe src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\">\n" +
+            output +=
+                 "    <div class=\"span10\" name=\"bodyHTML_Formatted\">\n" +
+                    "       <h3>HTML body formatted</h3>\n" +
+                    "       <div class=\"well\">" + mockMail.getBodyHtml() + "</div>\n" +
+                    "    </div>\n";
+
+            // also show a parsed version via an iframe
+            output +=
+                    "    <div class=\"span10\" name=\"iFrame\">\n" +
+                    "        <iframe src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\" style=\"\" name=\"bodyHTML_iFrame\">\n" +
                     "        </iframe>\n" +
-					"    </div>";
+                    "    </div>";
         }
 
 		// just output the raw mail so we're sure everything is on the screen
@@ -84,9 +90,9 @@ public class MailViewHtmlBuilder implements HtmlBuilder
 		{
 			// output complete raw mail
 			output +=
-					"    <div class=\"span10\">\n" +
+					"    <div class=\"span10\" name=\"rawOutput\">\n" +
 							"       <h3>Complete raw mail output</h3>\n" +
-							"       <p class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getRawMail()).replaceAll("\n", "<br />") + "</p>\n" +
+							"       <div class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getRawMail()) + "</div>\n" +
 							"    </div>\n";
 		}
 

@@ -16,7 +16,7 @@ import java.util.Properties;
 
 public class AppStarter
 {
-    public static final float VERSION_NUMBER = 1.3f;
+    public static final float VERSION_NUMBER = 1.4f;
 
     public static void main(String[] args)
     {
