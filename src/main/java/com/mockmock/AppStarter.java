@@ -1,7 +1,6 @@
 package com.mockmock;
 
 import com.mockmock.console.Parser;
-import com.mockmock.irc.IrcServer;
 import com.mockmock.server.Server;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -34,16 +33,6 @@ public class AppStarter
         smtpServer.start();
 
 //		fillQueueWithTestMails(settings.getSmtpPort(), 20);
-
-		if (settings.isConnectToIrc())
-		{
-			IrcServer ircServer = (IrcServer) factory.getBean("ircServer");
-			ircServer.setServer(settings.getIrcServer());
-			ircServer.setPort(settings.getIrcPort());
-			ircServer.setNickname(settings.getNickname());
-			ircServer.setChannels(settings.getChannels());
-			ircServer.start();
-		}
 
         Server httpServer = (Server) factory.getBean("httpServer");
         httpServer.setPort(settings.getHttpPort());
