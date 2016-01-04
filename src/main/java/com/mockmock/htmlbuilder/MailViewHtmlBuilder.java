@@ -74,7 +74,8 @@ public class MailViewHtmlBuilder implements HtmlBuilder
             // also show a parsed version via an iframe
             output +=
                     "    <div class=\"span10\" name=\"iFrame\">\n" +
-                    "        <iframe src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\" style=\"\" name=\"bodyHTML_iFrame\">\n" +
+                    "        <h3>HTML body formatted</h3>\n" +
+                    "        <iframe class=\"well\" src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\" style=\"\" name=\"bodyHTML_iFrame\">\n" +
                     "        </iframe>\n" +
                     "    </div>";
         }
