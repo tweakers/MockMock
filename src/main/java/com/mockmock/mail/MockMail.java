@@ -13,6 +13,8 @@ public class MockMail implements Comparable<MockMail>
     private String rawMail;
     private MimeMessage mimeMessage;
     private long receivedTime;
+    private byte[] attachment;
+    private String attacheFileName;
 
     public long getId()
     {
@@ -112,5 +114,21 @@ public class MockMail implements Comparable<MockMail>
     public void setReceivedTime(long receivedTime)
     {
         this.receivedTime = receivedTime;
+    }
+
+    public byte[] getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(byte[] attachment) {
+        this.attachment = attachment;
+    }
+
+    public String getAttacheFileName() {
+        return attacheFileName;
+    }
+
+    public void setAttacheFileName(String attacheFileName) {
+        this.attacheFileName = attacheFileName;
     }
 }
