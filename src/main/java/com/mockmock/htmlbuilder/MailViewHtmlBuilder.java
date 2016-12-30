@@ -88,9 +88,9 @@ public class MailViewHtmlBuilder implements HtmlBuilder
                     "  if (document.getElementById){\n" +
                     "   if (iframeid && !window.opera){\n" +
                     "    if (iframeid.contentDocument && iframeid.contentDocument.body.offsetHeight){\n" +
-                    "     iframeid.height = iframeid.contentDocument.body.offsetHeight;\n" +
+                    "     iframeid.height = iframeid.contentDocument.body.offsetHeight + 40;\n" +
                     "    }else if(iframeid.Document && iframeid.Document.body.scrollHeight){\n" +
-                    "     iframeid.height = iframeid.Document.body.scrollHeight;\n" +
+                    "     iframeid.height = iframeid.Document.body.scrollHeight + 40;\n" +
                     "    }\n" +
                     "   }\n" +
                     "  }\n" +
@@ -100,8 +100,10 @@ public class MailViewHtmlBuilder implements HtmlBuilder
             output +=
                     "    <div class=\"span10\" name=\"iFrame\">\n" +
                     "        <h3>HTML body formatted</h3>\n" +
-                    "        <iframe class=\"well\" id=\"htmliframe\" src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\" style=\"\" name=\"bodyHTML_iFrame\">\n" +
+                    "        <div>\n" +
+                    "        <iframe class=\"well\" width=\"100%\" id=\"htmliframe\"  onload=\"Javascript:SetCwinHeight()\" height=\"1\" frameborder=\"0\" src=\"/view/html/" + mockMail.getId() + "\"name=\"bodyHTML_iFrame\">\n" +
                     "        </iframe>\n" +
+                    "        <div>\n" +
                     "    </div>";
         }
 
