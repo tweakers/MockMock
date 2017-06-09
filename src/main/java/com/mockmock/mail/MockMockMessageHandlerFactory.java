@@ -2,6 +2,7 @@ package com.mockmock.mail;
 
 import com.google.common.eventbus.EventBus;
 import com.mockmock.Settings;
+import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,6 @@ import org.subethamail.smtp.MessageContext;
 import org.subethamail.smtp.MessageHandler;
 import org.subethamail.smtp.MessageHandlerFactory;
 import org.subethamail.smtp.RejectException;
-import org.apache.commons.io.IOUtils;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -154,7 +154,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
                                 }
                             }
 
-                        }else if(contentType.matches("application/octet-stream.*")){
+                        } else if (contentType.matches("application/octet-stream.*") || contentType.matches("application/pdf.*")) {
                             // attachment
                             String strFileName = MimeUtility.decodeText(bodyPart.getFileName());
                             mockMail.setAttacheFileName(strFileName);
