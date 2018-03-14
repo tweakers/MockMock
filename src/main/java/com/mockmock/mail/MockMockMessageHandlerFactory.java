@@ -134,6 +134,14 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
                         {
                             mockMail.setBodyHtml(convertStreamToString(bodyPart.getInputStream()));
                         }
+                        else if(contentType.contains("multipart"))
+                        {
+                            // Loop if the content type is multipart then get the content that is in that part,
+                            // make it the new container and restart the loop in that part of the message.
+                            multipart = (Multipart)bodyPart.getContent();
+                            i = -1;
+                            continue;
+                        }
                     }
                 }
                 else if(messageContent instanceof InputStream)
