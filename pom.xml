@@ -19,8 +19,8 @@
     </prerequisites>
 
     <properties>
-        <project.build.sourceEncoding>ISO-8859-15</project.build.sourceEncoding>
-        <project.resources.sourceEncoding>ISO-8859-15</project.resources.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.resources.sourceEncoding>UTF-8</project.resources.sourceEncoding>
         <spring.version>4.1.2.RELEASE</spring.version>
     </properties>
 
