@@ -31,12 +31,12 @@ public class Settings
 	/**
 	 * A set of "From" email addresses to filter
 	 */
-    private Set<String> filterFromEmailAddresses = new HashSet<>();
+    private Set<String> filterFromEmailAddresses = new HashSet<String>();
 
 	/**
 	 * A set of "To" email addresses to filter
 	 */
-    private Set<String> filterToEmailAddresses = new HashSet<>();
+    private Set<String> filterToEmailAddresses = new HashSet<String>();
 
     /**
      * Path to the static folder containing the images, css and js
