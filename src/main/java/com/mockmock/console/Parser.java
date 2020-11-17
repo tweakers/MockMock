@@ -126,7 +126,7 @@ public class Parser
 		{
 			String input = cmd.getOptionValue("ff");
 			String[] emailAddresses = input.split(",");
-			settings.setFilterFromEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
+            settings.setFilterFromEmailAddresses(new HashSet<String>(Arrays.asList(emailAddresses)));
 		}
 	}
 
@@ -136,7 +136,7 @@ public class Parser
 		{
 			String input = cmd.getOptionValue("ft");
 			String[] emailAddresses = input.split(",");
-			settings.setFilterToEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
+            settings.setFilterToEmailAddresses(new HashSet<String>(Arrays.asList(emailAddresses)));
 		}
 	}
 

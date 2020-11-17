@@ -1,7 +1,6 @@
 package com.mockmock.mail;
 
 import com.google.common.eventbus.Subscribe;
-import com.mockmock.AppStarter;
 import com.mockmock.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import java.util.ListIterator;
 @Service
 public class MailQueue
 {
-    private static ArrayList<MockMail> mailQueue = new ArrayList<>();
+    private static ArrayList<MockMail> mailQueue = new ArrayList<MockMail>();
 
     private Settings settings;
 

@@ -63,20 +63,47 @@ public class MailViewHtmlBuilder implements HtmlBuilder
                     "    </div>\n";
         }
 
-        if(mockMail.getBodyHtml() != null)
+        if(mockMail.getAttacheFileName() != null)
         {
             output +=
-                    "    <div class=\"span10\" name=\"bodyHTML_Unformatted\">\n" +
-                    "       <h3>HTML body unformatted</h3>\n" +
-                    "       <div class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()) + "</div>\n" +
-                    "    </div>\n";
+                    "    <div class=\"span10\" name=\"bodyPlainText\">\n" +
+                            "       <h3>Attachment</h3>\n" +
+                            "       <div class=\"well\"><a href=\"/attachment/" +mockMail.getId() + "\">" + StringEscapeUtils.escapeHtml(mockMail.getAttacheFileName()) + "</a></div>\n" +
+                            "    </div>\n";
+        }
+
+        if(mockMail.getBodyHtml() != null)
+        {
+//            output +=
+//                    "    <div class=\"span10\" name=\"bodyHTML_Unformatted\">\n" +
+//                    "       <h3>HTML body unformatted</h3>\n" +
+//                    "       <div class=\"well\">" + StringEscapeUtils.escapeHtml(mockMail.getBodyHtml()) + "</div>\n" +
+//                    "    </div>\n";
 
             // also show a parsed version via an iframe
             output +=
+                    "<script type=\"text/javascript\">\n" +
+                    " function SetCwinHeight(){\n" +
+                    "  var iframeid=document.getElementById(\"htmliframe\"); //iframe id\n" +
+                    "  if (document.getElementById){\n" +
+                    "   if (iframeid && !window.opera){\n" +
+                    "    if (iframeid.contentDocument && iframeid.contentDocument.body.offsetHeight){\n" +
+                    "     iframeid.height = iframeid.contentDocument.body.offsetHeight + 40;\n" +
+                    "    }else if(iframeid.Document && iframeid.Document.body.scrollHeight){\n" +
+                    "     iframeid.height = iframeid.Document.body.scrollHeight + 40;\n" +
+                    "    }\n" +
+                    "   }\n" +
+                    "  }\n" +
+                    " }\n" +
+                    "</script>";
+
+            output +=
                     "    <div class=\"span10\" name=\"iFrame\">\n" +
                     "        <h3>HTML body formatted</h3>\n" +
-                    "        <iframe class=\"well\" src=\"/view/html/" + mockMail.getId() + "\" style=\"width: 780px; height: 700px; overflow: scroll;\" style=\"\" name=\"bodyHTML_iFrame\">\n" +
+                    "        <div>\n" +
+                    "        <iframe class=\"well\" width=\"100%\" id=\"htmliframe\"  onload=\"Javascript:SetCwinHeight()\" height=\"1\" frameborder=\"0\" src=\"/view/html/" + mockMail.getId() + "\"name=\"bodyHTML_iFrame\">\n" +
                     "        </iframe>\n" +
+                    "        <div>\n" +
                     "    </div>";
         }
 
