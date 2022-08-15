@@ -21,7 +21,7 @@
     <properties>
         <project.build.sourceEncoding>ISO-8859-15</project.build.sourceEncoding>
         <project.resources.sourceEncoding>ISO-8859-15</project.resources.sourceEncoding>
-        <spring.version>5.2.21.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
     </properties>
 
     <build>
