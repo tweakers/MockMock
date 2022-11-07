@@ -40,7 +40,7 @@ public class MailQueue
 
     /**
      * Returns the MockMail that belongs to the given ID
-     * @param id The id of the mail mail that needs to be retrieved
+     * @param id The id of the mail that needs to be retrieved
      * @return Returns the MockMail when found or null otherwise
      */
     public MockMail getById(long id)

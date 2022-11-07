@@ -61,7 +61,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         }
 
         /**
-         * Called first, after the MAIL FROM during a SMTP exchange.
+         * Called first, after the MAIL FROM during an SMTP exchange.
          * @param from String
          * @throws RejectException
          */
@@ -81,7 +81,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         }
 
         /**
-         * Called once for every RCPT TO during a SMTP exchange.
+         * Called once for every RCPT TO during an SMTP exchange.
          * This will occur after a from() call.
          * @param recipient String
          * @throws RejectException
