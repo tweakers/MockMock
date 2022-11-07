@@ -1,6 +1,5 @@
 package com.mockmock.htmlbuilder;
 
-import com.mockmock.AppStarter;
 import com.mockmock.Settings;
 import com.mockmock.Util;
 import org.springframework.stereotype.Service;

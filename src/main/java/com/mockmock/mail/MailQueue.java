@@ -1,7 +1,6 @@
 package com.mockmock.mail;
 
 import com.google.common.eventbus.Subscribe;
-import com.mockmock.AppStarter;
 import com.mockmock.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
