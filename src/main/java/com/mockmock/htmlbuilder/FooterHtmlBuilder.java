@@ -18,28 +18,20 @@ public class FooterHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-    	String output = "";
+    	StringBuilder output = new StringBuilder();
     	Util util = new Util();
 
     	if(settings.getStaticFolderPath() != null)
     	{
-	    	output +=
-	                "  <script src=\"/js/jquery-1.8.1.min.js\"></script>\n" +
-	                "  <script src=\"/js/bootstrap.min.js\"></script>\n" +
-	                "  <script src=\"/js/mockmock.js\"></script>\n";
+	    	output.append("  <script src=\"/js/jquery-1.8.1.min.js\"></script>\n" + "  <script src=\"/js/bootstrap.min.js\"></script>\n" + "  <script src=\"/js/mockmock.js\"></script>\n");
     	}
     	else
     	{
-    		output +=
-    				"  <script>\n" + util.getFile("/js/jquery-1.8.1.min.js") + "</script>\n" +
-    				"  <script>\n" + util.getFile("/js/bootstrap.min.js") + "</script>\n" +
-    				"  <script>\n" + util.getFile("/js/mockmock.js") + "</script>\n";
+    		output.append("  <script>\n").append(util.getFile("/js/jquery-1.8.1.min.js")).append("</script>\n").append("  <script>\n").append(util.getFile("/js/bootstrap.min.js")).append("</script>\n").append("  <script>\n").append(util.getFile("/js/mockmock.js")).append("</script>\n");
     	}
 
-    	output +=
-                "  </body>\n" +
-                "</html>\n";
+    	output.append("  </body>\n" + "</html>\n");
 
-    	return output;
+    	return output.toString();
     }
 }
