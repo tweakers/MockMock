@@ -62,15 +62,7 @@ public class Parser
     {
         if(cmd.hasOption("ec"))
         {
-            try
-            {
-                // settings.setShowEmailInConsole(Boolean.valueOf(cmd.getOptionValue("ec")));
-                settings.setShowEmailInConsole(true);
-            }
-            catch(IllegalArgumentException e)
-            {
-                System.err.println("Invalid value given, using default " + settings.getShowEmailInConsole());
-            }
+            settings.setShowEmailInConsole(true);
         }
     }
 
