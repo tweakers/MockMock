@@ -1,6 +1,5 @@
 package com.mockmock.console;
 
-
 import com.mockmock.Settings;
 import org.apache.commons.cli.*;
 import org.springframework.stereotype.Service;
@@ -43,7 +42,7 @@ public class Parser
                 System.exit(0);
             }
 
-            partseShowEmailInConsoleOption(cmd, settings);
+            parseShowEmailInConsoleOption(cmd, settings);
             parseSmtpPortOption(cmd, settings);
             parseHttpPortOption(cmd, settings);
             parseMailQueueSizeOption(cmd, settings);
@@ -59,7 +58,7 @@ public class Parser
         return settings;
     }
 
-    protected void partseShowEmailInConsoleOption(CommandLine cmd, Settings settings)
+    protected void parseShowEmailInConsoleOption(CommandLine cmd, Settings settings)
     {
         if(cmd.hasOption("ec"))
         {
