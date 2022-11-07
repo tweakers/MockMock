@@ -18,7 +18,7 @@ public class Parser
     {
         // define the possible options
         Options options = new Options();
-        options.addOption("p", true, "The mail port number to use. Default is 25000.");
+        options.addOption("p", true, "The mail port number to use. Default is 25.");
         options.addOption("h", true, "The http port number to use. Default is 8282.");
         options.addOption("m", true, "The maximum size of the mail queue. Default is 1000.");
         options.addOption("c", true, "Comma separated list of channels. Default is #postman.");
