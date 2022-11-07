@@ -72,7 +72,7 @@ public class Parser
         {
             try
             {
-                settings.setSmtpPort(Integer.valueOf(cmd.getOptionValue("p")));
+                settings.setSmtpPort(Integer.parseInt(cmd.getOptionValue("p")));
             }
             catch (NumberFormatException e)
             {
@@ -87,7 +87,7 @@ public class Parser
         {
             try
             {
-                settings.setHttpPort(Integer.valueOf(cmd.getOptionValue("h")));
+                settings.setHttpPort(Integer.parseInt(cmd.getOptionValue("h")));
             }
             catch (NumberFormatException e)
             {
@@ -102,7 +102,7 @@ public class Parser
         {
             try
             {
-                settings.setMaxMailQueueSize(Integer.valueOf(cmd.getOptionValue("m")));
+                settings.setMaxMailQueueSize(Integer.parseInt(cmd.getOptionValue("m")));
             }
             catch (NumberFormatException e)
             {
