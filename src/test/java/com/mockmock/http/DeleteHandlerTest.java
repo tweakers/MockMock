@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +44,6 @@ public class DeleteHandlerTest {
 
 	@Test
 	public void handle_delete_nothing() throws ServletException, IOException {
-		doNothing().when(queue).emptyQueue();
 		handler.handle("/mail/delete/nothing", request, httpServletRequest, httpServletResponse);
 		verify(queue, times(0)).emptyQueue();
 	}
