@@ -21,7 +21,7 @@ import java.util.Properties;
 @Service
 public class MockMockMessageHandlerFactory implements MessageHandlerFactory
 {
-    private EventBus eventBus;
+    private final EventBus eventBus;
 	private Settings settings;
 
     @Autowired
@@ -51,7 +51,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
          * Constructor
          * @param context MessageContext
          */
-        public MockMockHandler(MessageContext context)
+        MockMockHandler(MessageContext context)
         {
             this.context = context;
             this.mockMail = new MockMail();
