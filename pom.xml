@@ -14,8 +14,8 @@
     <inceptionYear>2012</inceptionYear>
 
     <properties>
-        <project.build.sourceEncoding>ISO-8859-15</project.build.sourceEncoding>
-        <project.resources.sourceEncoding>ISO-8859-15</project.resources.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.resources.sourceEncoding>UTF-8</project.resources.sourceEncoding>
         <slf4j.version>2.0.4</slf4j.version>
     </properties>
 
@@ -173,6 +173,26 @@
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <configLocation>checkstyle.xml</configLocation>
+                            <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
