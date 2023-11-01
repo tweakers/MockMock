@@ -30,7 +30,7 @@ The easiest way to install and run MockMock is by downloading the jar file [here
 `java -jar MockMock.jar`
 
 This will run MockMock on the default ports 25 (for SMTP) and 8282 (the web interface). Please note you might need root permissions on some systems to let it listen on port 25.
-After it started you can use your internet browser to navigate to [http://localhost:8282] (replace host name and web port if necessary). This will now show you the emails it received (which should be none at the moment). You can now send emails using the built in SMTP server running on port 25 by default. The emails should be visible via the web interface. To run MockMock on another port, you can start it with the following parameters:
+After it started you can use your internet browser to navigate to [http://localhost:8282] (replace host name and web port if necessary). This will now show you the emails it received (which should be none at the moment). You can now send emails using the built-in SMTP server running on port 25 by default. The emails should be visible via the web interface. To run MockMock on another port, you can start it with the following parameters:
 `java -jar MockMock.jar -p 25000 -h 8080`
 
 This will run MockMock on SMTP port 25000 and http port 8080.

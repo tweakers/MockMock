@@ -21,7 +21,7 @@ import java.util.Properties;
 @Service
 public class MockMockMessageHandlerFactory implements MessageHandlerFactory
 {
-    private EventBus eventBus;
+    private final EventBus eventBus;
 	private Settings settings;
 
     @Autowired
@@ -51,7 +51,7 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
          * Constructor
          * @param context MessageContext
          */
-        public MockMockHandler(MessageContext context)
+        MockMockHandler(MessageContext context)
         {
             this.context = context;
             this.mockMail = new MockMail();
@@ -61,9 +61,9 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         }
 
         /**
-         * Called first, after the MAIL FROM during a SMTP exchange.
-         * @param from String
-         * @throws RejectException
+         * Called first, after the MAIL FROM during an SMTP exchange.
+         * @param from the email sender
+         * @throws RejectException never
          */
         @Override
         public void from(String from) throws RejectException
@@ -81,10 +81,10 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         }
 
         /**
-         * Called once for every RCPT TO during a SMTP exchange.
+         * Called once for every RCPT TO during an SMTP exchange.
          * This will occur after a from() call.
-         * @param recipient String
-         * @throws RejectException
+         * @param recipient the email recipient
+         * @throws RejectException never
          */
         @Override
         public void recipient(String recipient) throws RejectException
@@ -100,8 +100,8 @@ public class MockMockMessageHandlerFactory implements MessageHandlerFactory
         /**
          * Called when the DATA part of the SMTP exchange begins.
          * @param data InputStream
-         * @throws RejectException
-         * @throws IOException
+         * @throws RejectException never
+         * @throws IOException if there is a problem getting the message contents
          */
         @Override
         public void data(InputStream data) throws RejectException, IOException

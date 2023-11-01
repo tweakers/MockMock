@@ -19,50 +19,44 @@ public class HeaderHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         Util util = new Util();
 
-        output +=
-                "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "  <head>\n" +
-                "    <title>MockMock - SMTP Mock Server version " + AppStarter.VERSION_NUMBER + "</title>\n";
-
+        output.append("<!DOCTYPE html>\n" + "<html lang=\"en\">\n" + "  <head>\n" + "    <title>MockMock - SMTP Mock Server version " + AppStarter.VERSION_NUMBER + "</title>\n");
 
         if(settings.getStaticFolderPath() != null)
         {
-            output +=
-                "    <link href=\"/css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
-                "    <link href=\"/css/mockmock.css\" rel=\"stylesheet\">\n";
+            output.append("    <link href=\"/css/bootstrap.min.css\" rel=\"stylesheet\">\n")
+                    .append("    <link href=\"/css/mockmock.css\" rel=\"stylesheet\">\n");
         }
         else
         {
-            output +=
-                "    <style>\n" + util.getFile("/css/mockmock.css") + util.getFile("/css/bootstrap.min.css") +
-                "    </style>\n";
+            output.append("    <style>\n")
+                    .append(util.getFile("/css/mockmock.css"))
+                    .append(util.getFile("/css/bootstrap.min.css"))
+                    .append("    </style>\n");
         }
 
-        output +=
-                "  </head>\n" +
-                "  <body>\n" +
-                "  <div class=\"navbar navbar-inverse navbar-fixed-top\">\n" +
-                "    <div class=\"navbar-inner\">\n" +
-                "      <div class=\"container\">\n" +
-                "        <a class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">\n" +
-                "            <span class=\"icon-bar\"></span>\n" +
-                "            <span class=\"icon-bar\"></span>\n" +
-                "          </a>\n" +
-                "          <a class=\"brand\" href=\"/\">MockMock</a>\n" +
-                "          <div class=\"nav-collapse collapse\">\n" +
-                "            <ul class=\"nav\">\n" +
-                "              <li class=\"active\"><a href=\"/\">Home</a></li>\n" +
-                "              <li><a href=\"https://github.com/tweakers-dev/MockMock\">MockMock on Github</a></li>\n" +
-                "            </ul>\n" +
-                "          </div>\n" +
-                "      </div>\n" +
-                "    </div>\n" +
-                "  </div>\n";
+        output.append("  </head>\n")
+                .append("  <body>\n")
+                .append("  <div class=\"navbar navbar-inverse navbar-fixed-top\">\n")
+                .append("    <div class=\"navbar-inner\">\n")
+                .append("      <div class=\"container\">\n")
+                .append("        <a class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">\n")
+                .append("            <span class=\"icon-bar\"></span>\n")
+                .append("            <span class=\"icon-bar\"></span>\n")
+                .append("          </a>\n")
+                .append("          <a class=\"brand\" href=\"/\">MockMock</a>\n")
+                .append("          <div class=\"nav-collapse collapse\">\n")
+                .append("            <ul class=\"nav\">\n")
+                .append("              <li class=\"active\"><a href=\"/\">Home</a></li>\n")
+                .append("              <li><a href=\"https://github.com/tweakers-dev/MockMock\">MockMock on Github</a></li>\n")
+                .append("            </ul>\n")
+                .append("          </div>\n")
+                .append("      </div>\n")
+                .append("    </div>\n")
+                .append("  </div>\n");
 
-        return output;
+        return output.toString();
     }
 }

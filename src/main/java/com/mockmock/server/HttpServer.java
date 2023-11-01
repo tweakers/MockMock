@@ -33,7 +33,7 @@ public class HttpServer implements com.mockmock.server.Server
     {
         Server http = new Server(port);
 
-        // get the path to the "static" folder. If it doesn't exists, check if it's in the folder of the file being executed.
+        // get the path to the "static" folder. If it doesn't exist, check if it's in the folder of the file being executed.
         String path = "./static";
         if(settings.getStaticFolderPath() != null)
         {

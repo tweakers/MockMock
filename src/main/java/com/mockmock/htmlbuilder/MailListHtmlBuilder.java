@@ -19,36 +19,36 @@ public class MailListHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-        String output =
-                    "<div class=\"container\">\n";
+        StringBuilder output =
+                new StringBuilder("<div class=\"container\">\n");
 
-        if(mailQueue == null || mailQueue.size() == 0)
+        if(mailQueue == null || mailQueue.isEmpty())
         {
-            output += "  <h2>No emails in queue</h2>\n";
+            output.append("  <h2>No emails in queue</h2>\n");
         }
         else
         {
             String mailText = mailQueue.size() == 1 ? "email" : "emails";
-            output += "  <h1>You have "  + mailQueue.size() + " " + mailText + "! <small class=\"deleteLink\"><a class=\"delete\" href=\"/mail/delete/all\">Delete all</a></small></h1>\n";
-            output += "  <table class=\"table table-striped\">\n";
-            output += "    <thead>\n";
-            output += "      <th>From</th>\n";
-            output += "      <th>To</th>\n";
-            output += "      <th>Subject</th>\n";
-            output += "      <th>Action</th>\n";
-            output += "    </thead>\n";
-            output += "    <tbody>\n";
+            output.append("  <h1>You have ").append(mailQueue.size()).append(" ").append(mailText).append("! <small class=\"deleteLink\"><a class=\"delete\" href=\"/mail/delete/all\">Delete all</a></small></h1>\n");
+            output.append("  <table class=\"table table-striped\">\n");
+            output.append("    <thead>\n");
+            output.append("      <th>From</th>\n");
+            output.append("      <th>To</th>\n");
+            output.append("      <th>Subject</th>\n");
+            output.append("      <th>Action</th>\n");
+            output.append("    </thead>\n");
+            output.append("    <tbody>\n");
             for (MockMail mail : mailQueue)
             {
-                output += buildMailRow(mail);
+                output.append(buildMailRow(mail));
             }
-            output += "    </tbody>\n";
-            output += "  </table>\n";
+            output.append("    </tbody>\n");
+            output.append("  </table>\n");
         }
 
-        output += "</div>\n";
+        output.append("</div>\n");
 
-        return output;
+        return output.toString();
     }
 
     private String buildMailRow(MockMail mail)
