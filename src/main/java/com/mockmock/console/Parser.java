@@ -1,6 +1,5 @@
 package com.mockmock.console;
 
-
 import com.mockmock.Settings;
 import org.apache.commons.cli.*;
 import org.springframework.stereotype.Service;
@@ -19,15 +18,15 @@ public class Parser
     {
         // define the possible options
         Options options = new Options();
-        options.addOption("p", true, "The mail port number to use. Default is 25000.");
-        options.addOption("h", true, "The http port number to use. Default is 8282.");
-        options.addOption("m", true, "The maximum size of the mail qeueue. Default is 1000.");
-        options.addOption("c", true, "Comma separated list of channels. Default is #postman.");
-        options.addOption("ff", true, "Filters out from email addresses (comma separated).");
-        options.addOption("ft", true, "Filters out to email addresses (comma separated).");
-        options.addOption("s", true, "Full path to the folder containing the static files like images and css.");
-        options.addOption("ec", false, "Turns on emails printing to console. Default off");
-        options.addOption("?", false, "Shows this help information.");
+        options.addOption("p", "smtp", true, "The mail port number to use. Default is 25.");
+        options.addOption("h", "http", true, "The http port number to use. Default is 8282.");
+        options.addOption("m", "queue", true, "The maximum size of the mail queue. Default is 1000.");
+        options.addOption("c", "channels", true, "Comma separated list of channels. Default is #postman.");
+        options.addOption("f", "filter-from", true, "Filters out from email addresses (comma separated).");
+        options.addOption("t", "filter-to", true, "Filters out to email addresses (comma separated).");
+        options.addOption("s", "static", true, "Full path to the folder containing the static files like images and css.");
+        options.addOption("ec", "console", false, "Turns on emails printing to console. Default off");
+        options.addOption("?", "help", false, "Shows this help information.");
 
         // parse the given arguments
         CommandLineParser parser = new PosixParser();
@@ -43,7 +42,7 @@ public class Parser
                 System.exit(0);
             }
 
-            partseShowEmailInConsoleOption(cmd, settings);
+            parseShowEmailInConsoleOption(cmd, settings);
             parseSmtpPortOption(cmd, settings);
             parseHttpPortOption(cmd, settings);
             parseMailQueueSizeOption(cmd, settings);
@@ -59,19 +58,11 @@ public class Parser
         return settings;
     }
 
-    protected void partseShowEmailInConsoleOption(CommandLine cmd, Settings settings)
+    protected void parseShowEmailInConsoleOption(CommandLine cmd, Settings settings)
     {
         if(cmd.hasOption("ec"))
         {
-            try
-            {
-                // settings.setShowEmailInConsole(Boolean.valueOf(cmd.getOptionValue("ec")));
-                settings.setShowEmailInConsole(true);
-            }
-            catch(IllegalArgumentException e)
-            {
-                System.err.println("Invalid value given, using default " + settings.getShowEmailInConsole());
-            }
+            settings.setShowEmailInConsole(true);
         }
     }
 
@@ -81,7 +72,7 @@ public class Parser
         {
             try
             {
-                settings.setSmtpPort(Integer.valueOf(cmd.getOptionValue("p")));
+                settings.setSmtpPort(Integer.parseInt(cmd.getOptionValue("p")));
             }
             catch (NumberFormatException e)
             {
@@ -96,7 +87,7 @@ public class Parser
         {
             try
             {
-                settings.setHttpPort(Integer.valueOf(cmd.getOptionValue("h")));
+                settings.setHttpPort(Integer.parseInt(cmd.getOptionValue("h")));
             }
             catch (NumberFormatException e)
             {
@@ -111,7 +102,7 @@ public class Parser
         {
             try
             {
-                settings.setMaxMailQueueSize(Integer.valueOf(cmd.getOptionValue("m")));
+                settings.setMaxMailQueueSize(Integer.parseInt(cmd.getOptionValue("m")));
             }
             catch (NumberFormatException e)
             {
@@ -122,9 +113,9 @@ public class Parser
 
 	protected void parseFilterFromEmailAddressesOption(CommandLine cmd, Settings settings)
 	{
-		if(cmd.hasOption("ff"))
+		if(cmd.hasOption("f"))
 		{
-			String input = cmd.getOptionValue("ff");
+			String input = cmd.getOptionValue("f");
 			String[] emailAddresses = input.split(",");
 			settings.setFilterFromEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
 		}
@@ -132,9 +123,9 @@ public class Parser
 
 	protected void parseFilterToEmailAddressesOption(CommandLine cmd, Settings settings)
 	{
-		if(cmd.hasOption("ft"))
+		if(cmd.hasOption("t"))
 		{
-			String input = cmd.getOptionValue("ft");
+			String input = cmd.getOptionValue("t");
 			String[] emailAddresses = input.split(",");
 			settings.setFilterToEmailAddresses(new HashSet<>(Arrays.asList(emailAddresses)));
 		}

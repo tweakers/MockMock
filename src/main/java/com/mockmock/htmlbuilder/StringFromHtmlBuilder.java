@@ -13,12 +13,12 @@ public class StringFromHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         MimeMessage mimeMessage = mockMail.getMimeMessage();
 
 		if(mimeMessage == null)
 		{
-			return output;
+			return output.toString();
 		}
 
         try
@@ -29,10 +29,10 @@ public class StringFromHtmlBuilder implements HtmlBuilder
                 int i = 1;
                 for(Address address : addresses)
                 {
-                    output += StringEscapeUtils.escapeHtml(address.toString());
+                    output.append(StringEscapeUtils.escapeHtml(address.toString()));
                     if(addresses.length != i)
                     {
-                        output += ", ";
+                        output.append(", ");
                     }
 
                     i++;
@@ -40,7 +40,7 @@ public class StringFromHtmlBuilder implements HtmlBuilder
             }
             else
             {
-                output += StringEscapeUtils.escapeHtml(mockMail.getFrom());
+                output.append(StringEscapeUtils.escapeHtml(mockMail.getFrom()));
             }
         }
         catch (MessagingException e)
@@ -48,7 +48,7 @@ public class StringFromHtmlBuilder implements HtmlBuilder
             e.printStackTrace();
         }
 
-        return output;
+        return output.toString();
     }
 
     public void setMockMail(MockMail mockMail)

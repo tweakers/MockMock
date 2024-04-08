@@ -16,12 +16,12 @@ public class StringRecipientHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         MimeMessage mimeMessage = mockMail.getMimeMessage();
 
 		if(mimeMessage == null)
 		{
-			return output;
+			return output.toString();
 		}
 
         try
@@ -48,10 +48,10 @@ public class StringRecipientHtmlBuilder implements HtmlBuilder
             int i = 1;
             for(Address address : addresses)
             {
-                output += StringEscapeUtils.escapeHtml(address.toString());
+                output.append(StringEscapeUtils.escapeHtml(address.toString()));
                 if(addresses.length != i)
                 {
-                    output += ", ";
+                    output.append(", ");
                 }
 
                 i++;
@@ -69,7 +69,7 @@ public class StringRecipientHtmlBuilder implements HtmlBuilder
         }
         else
         {
-            shortName = output;
+            shortName = output.toString();
         }
 
         return "<span title=\"" + output + "\">" + shortName + "</title>";

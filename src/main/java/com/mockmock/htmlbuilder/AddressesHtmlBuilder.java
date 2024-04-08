@@ -12,7 +12,7 @@ public class AddressesHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         StringFromHtmlBuilder fromHtmlBuilder = new StringFromHtmlBuilder();
         fromHtmlBuilder.setMockMail(mockMail);
@@ -20,26 +20,26 @@ public class AddressesHtmlBuilder implements HtmlBuilder
         StringRecipientHtmlBuilder recipientHtmlBuilder = new StringRecipientHtmlBuilder();
         recipientHtmlBuilder.setMockMail(mockMail);
 
-        output += "From: " + fromHtmlBuilder.build() + "<br />\n";
+        output.append("From: ").append(fromHtmlBuilder.build()).append("<br />\n");
 
         recipientHtmlBuilder.setRecipientType(MimeMessage.RecipientType.TO);
-        output += "To: " + recipientHtmlBuilder.build() + "<br />\n";
+        output.append("To: ").append(recipientHtmlBuilder.build()).append("<br />\n");
 
         recipientHtmlBuilder.setRecipientType(MimeMessage.RecipientType.CC);
         String ccOutput = recipientHtmlBuilder.build();
         if(ccOutput.length() > 0)
         {
-            output += "CC: " + ccOutput + "<br />\n";
+            output.append("CC: ").append(ccOutput).append("<br />\n");
         }
 
         recipientHtmlBuilder.setRecipientType(MimeMessage.RecipientType.BCC);
         String bccOutput = recipientHtmlBuilder.build();
         if(bccOutput.length() > 0)
         {
-            output += "BCC: " + bccOutput + "<br />\n";
+            output.append("BCC: ").append(bccOutput).append("<br />\n");
         }
 
-        return output;
+        return output.toString();
     }
 
     public void setMockMail(MockMail mockMail)

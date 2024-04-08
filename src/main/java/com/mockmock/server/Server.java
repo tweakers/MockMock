@@ -5,6 +5,6 @@ package com.mockmock.server;
  */
 public interface Server
 {
-    public void setPort(int port);
-    public void start();
+    void setPort(int port);
+    void start();
 }

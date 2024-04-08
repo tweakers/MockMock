@@ -14,21 +14,21 @@ public class MailViewHeadersHtmlBuilder implements HtmlBuilder
 
     public String build()
     {
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         if(mockMail != null)
         {
             MimeMessage mimeMessage = mockMail.getMimeMessage();
             try
             {
-                output += "<pre>\n";
-                Enumeration headers = mimeMessage.getAllHeaderLines();
+                output.append("<pre>\n");
+                Enumeration<?> headers = mimeMessage.getAllHeaderLines();
                 while (headers.hasMoreElements())
                 {
                     String header = (String) headers.nextElement();
-                    output += header + "<br />";
+                    output.append(header).append("<br />");
                 }
-                output += "</pre>";
+                output.append("</pre>");
             }
             catch (MessagingException e)
             {
@@ -36,7 +36,7 @@ public class MailViewHeadersHtmlBuilder implements HtmlBuilder
             }
         }
 
-        return output;
+        return output.toString();
     }
 
     public void setMockMail(MockMail mockMail)
